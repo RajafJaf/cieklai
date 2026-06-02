@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hytam Article</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(-45deg,#4facfe,#00f2fe,#667eea,#764ba2);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    min-height:100vh;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+nav{
+    display:flex;
+    gap:15px;
+}
+
+.menu{
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(45deg,#2196f3,#00e5ff);
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.menu:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+
+header{
+    background:white;
+    padding:20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+    color:#2196f3;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    padding:30px 0;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:.4s;
+    animation:cardMasuk .8s ease forwards;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+@keyframes cardMasuk{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.img{
+    height:200px;
+    background-size:cover;
+    background-position:center;
+}
+
+.card:hover .img{
+    transform:scale(1.05);
+}
+
+.content{
+    padding:20px;
+}
+
+.content h2{
+    color:#333;
+    margin-bottom:10px;
+}
+
+.content p{
+    color:#666;
+}
+
+.img1{
+background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200');
+}
+
+.img2{
+background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200');
+}
+
+.img3{
+background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200');
+}
+
+.img4{
+background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200');
+}
+
+.img5{
+background-image:url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200');
+}
+
+.img6{
+background-image:url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200');
+}
+
+.img7{
+background-image:url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200');
+}
+
+.img8{
+background-image:url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200');
+}
+
+.img9{
+background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200');
+}
+
+.img10{
+background-image:url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1200');
+}
+
+.fadeout{
+    animation:fadeout .6s forwards;
+}
+
+@keyframes fadeout{
+    from{
+        opacity:1;
+    }
+    to{
+        opacity:0;
+        transform:scale(1.05);
+    }
+}
+
+footer{
+    text-align:center;
+    color:white;
+    padding:30px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:auto;">
+
+        <div class="logo">😈 Hytam Article</div>
+
+        <nav>
+            <a href="index.html" class="menu">🏠 Home</a>
+            <a href="profil.html" class="menu">👤 developer</a>
+        </nav>
+
+    </div>
+</header>
+<div class="container">
+
+<div class="grid">
+
+<div class="card" onclick="bukaArtikel('artikel1.html')">
+<div class="img img1"></div>
+<div class="content">
+<h2>💻 Teknologi Digital</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel2.html')">
+<div class="img img2"></div>
+<div class="content">
+<h2>🤖 Kecerdasan Buatan</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel3.html')">
+<div class="img img3"></div>
+<div class="content">
+<h2>🌐 Internet Modern</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel4.html')">
+<div class="img img4"></div>
+<div class="content">
+<h2>🔐 Keamanan Siber</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel5.html')">
+<div class="img img5"></div>
+<div class="content">
+<h2>☁️ Cloud Computing</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel6.html')">
+<div class="img img6"></div>
+<div class="content">
+<h2>🦾 Robotika</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel7.html')">
+<div class="img img7"></div>
+<div class="content">
+<h2>⛓️ Blockchain</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel8.html')">
+<div class="img img8"></div>
+<div class="content">
+<h2>📱 Smartphone Masa Kini</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel9.html')">
+<div class="img img9"></div>
+<div class="content">
+<h2>🌱 Energi Terbarukan</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+<div class="card" onclick="bukaArtikel('artikel10.html')">
+<div class="img img10"></div>
+<div class="content">
+<h2>🏭 Industri 4.0</h2>
+<p>Klik untuk membaca artikel lengkap.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 hytam Artikel
+</footer>
+
+<script>
+
+function bukaArtikel(link){
+
+    document.body.classList.add("fadeout");
+
+    setTimeout(()=>{
+        window.location.href = link;
+    },600);
+
+}
+
+</script>
+
+</body>
+</html>

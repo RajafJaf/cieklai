@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energi Terbarukan</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#87ceeb,#4caf50);
+color:white;
+overflow-x:hidden;
+}
+
+/* Tombol Home */
+.home{
+position:fixed;
+top:20px;
+left:20px;
+padding:12px 24px;
+background:white;
+color:#2e7d32;
+text-decoration:none;
+font-weight:bold;
+border-radius:50px;
+box-shadow:0 0 20px rgba(255,255,255,.5);
+transition:.3s;
+z-index:999;
+}
+
+.home:hover{
+transform:scale(1.1);
+}
+
+/* Matahari */
+.sun{
+position:absolute;
+top:80px;
+right:80px;
+width:120px;
+height:120px;
+background:#ffd54f;
+border-radius:50%;
+box-shadow:0 0 50px #ffd54f;
+animation:shine 3s infinite alternate;
+}
+
+@keyframes shine{
+from{
+box-shadow:0 0 30px #ffd54f;
+}
+to{
+box-shadow:0 0 70px #ffd54f;
+}
+}
+
+/* Hero */
+.hero{
+height:65vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)),
+url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600");
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.hero h1{
+font-size:70px;
+text-shadow:0 0 20px rgba(255,255,255,.8);
+animation:fadeIn 2s;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* Turbin */
+.wind{
+position:absolute;
+bottom:20px;
+left:10%;
+width:8px;
+height:120px;
+background:white;
+}
+
+.wind::before{
+content:'';
+position:absolute;
+top:-20px;
+left:-35px;
+width:80px;
+height:80px;
+border-radius:50%;
+border:3px solid white;
+animation:spin 4s linear infinite;
+}
+
+@keyframes spin{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.article{
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+line-height:2;
+box-shadow:0 0 30px rgba(255,255,255,.15);
+animation:slideUp 1s;
+}
+
+@keyframes slideUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.article h2{
+margin-bottom:15px;
+color:#e8ffe8;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,.12);
+padding:25px;
+border-radius:15px;
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.fact{
+margin-top:30px;
+padding:20px;
+background:rgba(255,255,255,.15);
+border-left:5px solid #fff;
+border-radius:10px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.8;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<div class="sun"></div>
+
+<section class="hero">
+
+<div class="wind"></div>
+
+<h1>Energi Terbarukan</h1>
+
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Apa Itu Energi Terbarukan?</h2>
+
+<p>
+Energi terbarukan adalah energi yang berasal dari sumber daya alam
+yang dapat diperbarui secara alami dan berkelanjutan.
+</p>
+
+<p>
+Energi ini menjadi solusi penting untuk mengurangi ketergantungan
+terhadap bahan bakar fosil dan mengurangi dampak perubahan iklim.
+</p>
+
+<h2>Jenis Energi Terbarukan</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>☀️</h3>
+<p>Energi Surya dari sinar matahari.</p>
+</div>
+
+<div class="card">
+<h3>🌬️</h3>
+<p>Energi Angin dari pergerakan udara.</p>
+</div>
+
+<div class="card">
+<h3>💧</h3>
+<p>Energi Air dari aliran sungai dan bendungan.</p>
+</div>
+
+<div class="card">
+<h3>🌱</h3>
+<p>Bioenergi dari bahan organik.</p>
+</div>
+
+</div>
+
+<h2>Keuntungan Energi Terbarukan</h2>
+
+<p>
+✔ Ramah lingkungan.<br>
+✔ Mengurangi emisi gas rumah kaca.<br>
+✔ Sumber energi tidak mudah habis.<br>
+✔ Mendukung pembangunan berkelanjutan.<br>
+✔ Mengurangi ketergantungan pada bahan bakar fosil.
+</p>
+
+<h2>Tantangan Pengembangan</h2>
+
+<p>
+Meskipun memiliki banyak manfaat, pengembangan energi terbarukan
+masih menghadapi tantangan seperti biaya awal yang tinggi,
+ketergantungan pada kondisi alam, dan kebutuhan infrastruktur.
+</p>
+
+<div class="fact">
+🌍 Fakta Menarik: Matahari menghasilkan energi yang jauh lebih besar
+daripada kebutuhan energi seluruh manusia di Bumi setiap harinya.
+</div>
+
+<h2>Masa Depan Energi Terbarukan</h2>
+
+<p>
+Banyak negara mulai berinvestasi besar dalam energi terbarukan
+untuk menciptakan masa depan yang lebih bersih dan berkelanjutan.
+</p>
+
+<p>
+Teknologi panel surya, turbin angin, dan penyimpanan energi
+terus berkembang sehingga semakin efisien dan terjangkau.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Bright Article - Energi Terbarukan
+</footer>
+
+</body>
+</html>

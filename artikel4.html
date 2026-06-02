@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keamanan Siber</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Consolas','Courier New',monospace;
+}
+
+body{
+background:#050505;
+color:#00ff88;
+overflow-x:hidden;
+}
+
+.home{
+position:fixed;
+top:20px;
+left:20px;
+padding:12px 24px;
+background:#00ff88;
+color:black;
+text-decoration:none;
+font-weight:bold;
+border-radius:50px;
+box-shadow:0 0 20px #00ff88;
+transition:.3s;
+z-index:1000;
+}
+
+.home:hover{
+transform:scale(1.1);
+box-shadow:0 0 35px #00ff88;
+}
+
+.hero{
+height:65vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)),
+url("https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1600");
+background-size:cover;
+background-position:center;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:
+repeating-linear-gradient(
+0deg,
+transparent,
+transparent 2px,
+rgba(0,255,136,.05) 3px
+);
+animation:scan 8s linear infinite;
+}
+
+@keyframes scan{
+0%{
+transform:translateY(-50%);
+}
+100%{
+transform:translateY(50%);
+}
+}
+
+.hero h1{
+font-size:70px;
+z-index:1;
+text-shadow:
+0 0 10px #00ff88,
+0 0 20px #00ff88,
+0 0 40px #00ff88;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+opacity:.8;
+}
+to{
+opacity:1;
+}
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.article{
+background:#0a0a0a;
+border:1px solid #00ff88;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,255,136,.2);
+line-height:2;
+animation:fadeUp 1s;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.article h2{
+margin-bottom:15px;
+color:#00ffaa;
+text-shadow:0 0 10px #00ff88;
+}
+
+.panel{
+margin-top:30px;
+padding:20px;
+border:1px solid #00ff88;
+border-radius:15px;
+background:#111;
+}
+
+.panel ul{
+margin-left:20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:#111;
+padding:25px;
+border-radius:15px;
+text-align:center;
+border:1px solid #00ff88;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 20px #00ff88;
+}
+
+.card h3{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.warning{
+margin-top:30px;
+padding:20px;
+background:#1a0000;
+border-left:5px solid red;
+border-radius:10px;
+color:#ff7b7b;
+}
+
+footer{
+text-align:center;
+padding:40px;
+opacity:.7;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<section class="hero">
+<h1>CYBER SECURITY</h1>
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Apa Itu Keamanan Siber?</h2>
+
+<p>
+Keamanan siber (Cyber Security) adalah upaya melindungi sistem komputer,
+jaringan, aplikasi, dan data dari berbagai ancaman digital.
+Tujuannya adalah menjaga kerahasiaan, integritas, dan ketersediaan data.
+</p>
+
+<p>
+Di era digital saat ini, hampir semua aktivitas menggunakan internet,
+sehingga perlindungan terhadap data dan perangkat menjadi semakin penting.
+</p>
+
+<h2>Ancaman Siber yang Sering Terjadi</h2>
+
+<div class="panel">
+
+<ul>
+<li>Malware dan Virus Komputer</li>
+<li>Phishing (Penipuan Online)</li>
+<li>Pencurian Password</li>
+<li>Ransomware</li>
+<li>Kebocoran Data Pribadi</li>
+<li>Peretasan Akun Media Sosial</li>
+</ul>
+
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h3>24/7</h3>
+<p>Ancaman Siber Terjadi Setiap Saat</p>
+</div>
+
+<div class="card">
+<h3>Jutaan</h3>
+<p>Serangan Digital Setiap Hari</p>
+</div>
+
+<div class="card">
+<h3>100%</h3>
+<p>Pentingnya Melindungi Data</p>
+</div>
+
+</div>
+
+<h2>Cara Melindungi Diri</h2>
+
+<p>
+Beberapa langkah sederhana untuk meningkatkan keamanan digital:
+</p>
+
+<p>
+✔ Gunakan password yang kuat.<br>
+✔ Aktifkan autentikasi dua faktor (2FA).<br>
+✔ Jangan membuka tautan mencurigakan.<br>
+✔ Perbarui sistem dan aplikasi secara berkala.<br>
+✔ Gunakan antivirus terpercaya.<br>
+✔ Hindari membagikan informasi pribadi secara sembarangan.
+</p>
+
+<div class="warning">
+⚠ Peringatan: Sebagian besar serangan siber berhasil karena kelalaian
+pengguna, bukan karena kelemahan teknologi.
+</div>
+
+<h2>Masa Depan Keamanan Siber</h2>
+
+<p>
+Dengan berkembangnya Artificial Intelligence, Internet of Things (IoT),
+dan komputasi awan, tantangan keamanan siber akan semakin kompleks.
+Para ahli terus mengembangkan teknologi baru untuk menjaga keamanan
+informasi dan privasi pengguna di seluruh dunia.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 kipas angin artikel - Cyber Security
+</footer>
+
+</body>
+</html>

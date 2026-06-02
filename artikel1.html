@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teknologi Digital</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+
+.hero{
+height:60vh;
+background:
+linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+animation:zoom 2s ease;
+}
+
+@keyframes zoom{
+from{
+transform:scale(1.1);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.hero h1{
+font-size:60px;
+text-shadow:0 0 20px cyan;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px 20px;
+}
+
+.article{
+background:#1e293b;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,255,255,.2);
+line-height:1.9;
+animation:fadeUp 1s;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.home{
+position:fixed;
+top:20px;
+left:20px;
+background:cyan;
+color:black;
+padding:12px 20px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.home:hover{
+transform:scale(1.1);
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.7;
+}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<section class="hero">
+<h1>Teknologi Digital</h1>
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Apa itu Teknologi Digital?</h2>
+
+<br>
+
+<p>
+Teknologi digital merupakan teknologi yang menggunakan sistem komputer,
+internet, dan perangkat elektronik untuk mengolah data menjadi informasi
+yang bermanfaat.
+</p>
+
+<br>
+
+<p>
+Saat ini teknologi digital telah digunakan hampir di seluruh bidang,
+mulai dari pendidikan, kesehatan, industri, hingga hiburan.
+</p>
+
+<br>
+
+<p>
+Perkembangan teknologi digital memungkinkan komunikasi menjadi lebih
+cepat, penyimpanan data lebih aman, dan pekerjaan dapat dilakukan
+secara otomatis.
+</p>
+
+<br>
+
+<p>
+Di masa depan, teknologi digital diperkirakan akan semakin berkembang
+dengan hadirnya kecerdasan buatan, robotika, dan komputasi kuantum.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2120 ayam kutu
+</footer>
+
+</body>
+</html>

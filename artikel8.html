@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartphone Modern</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#6a11cb,#ff0080);
+color:white;
+overflow-x:hidden;
+}
+
+/* Tombol Home */
+.home{
+position:fixed;
+top:20px;
+left:20px;
+padding:12px 24px;
+background:white;
+color:#ff0080;
+text-decoration:none;
+font-weight:bold;
+border-radius:50px;
+box-shadow:0 0 20px rgba(255,255,255,.5);
+transition:.3s;
+z-index:999;
+}
+
+.home:hover{
+transform:scale(1.1);
+}
+
+/* Hero */
+.hero{
+height:65vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+url("https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600");
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.hero h1{
+font-size:70px;
+text-shadow:
+0 0 10px #fff,
+0 0 20px #ff66cc,
+0 0 40px #ff0080;
+animation:zoomIn 2s;
+}
+
+@keyframes zoomIn{
+from{
+opacity:0;
+transform:scale(.7);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+/* Smartphone Mockup */
+.phone{
+position:absolute;
+bottom:-70px;
+right:10%;
+width:180px;
+height:360px;
+background:black;
+border:8px solid #ddd;
+border-radius:30px;
+box-shadow:0 0 30px rgba(255,255,255,.4);
+animation:float 4s ease-in-out infinite;
+}
+
+.phone::before{
+content:'';
+position:absolute;
+top:15px;
+left:50%;
+transform:translateX(-50%);
+width:70px;
+height:10px;
+background:#222;
+border-radius:20px;
+}
+
+.phone-screen{
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#6a11cb,#ff0080);
+border-radius:20px;
+}
+
+@keyframes float{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-15px);
+}
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:120px 20px 40px;
+}
+
+.article{
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+line-height:2;
+box-shadow:0 0 30px rgba(255,255,255,.15);
+animation:fadeUp 1s;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.article h2{
+margin-bottom:15px;
+color:#ffe6f5;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,.1);
+padding:25px;
+border-radius:15px;
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,.15);
+}
+
+.card h3{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.fact{
+margin-top:30px;
+padding:20px;
+background:rgba(255,255,255,.1);
+border-left:5px solid white;
+border-radius:10px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.8;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<section class="hero">
+
+<h1>Smartphone Modern</h1>
+
+<div class="phone">
+<div class="phone-screen"></div>
+</div>
+
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Evolusi Smartphone</h2>
+
+<p>
+Smartphone telah berkembang menjadi perangkat multifungsi yang
+digunakan untuk komunikasi, pekerjaan, pendidikan, hiburan,
+hingga transaksi keuangan.
+</p>
+
+<p>
+Perkembangan teknologi membuat smartphone semakin cepat,
+ringan, dan memiliki fitur yang lebih canggih dari tahun ke tahun.
+</p>
+
+<h2>Fitur Smartphone Modern</h2>
+
+<div class="features">
+
+<div class="card">
+<h3>📷</h3>
+<p>Kamera beresolusi tinggi dengan teknologi AI.</p>
+</div>
+
+<div class="card">
+<h3>⚡</h3>
+<p>Prosesor cepat untuk multitasking dan gaming.</p>
+</div>
+
+<div class="card">
+<h3>🔋</h3>
+<p>Baterai tahan lama dengan pengisian cepat.</p>
+</div>
+
+<div class="card">
+<h3>📶</h3>
+<p>Dukungan jaringan 5G berkecepatan tinggi.</p>
+</div>
+
+</div>
+
+<h2>Peran Smartphone Saat Ini</h2>
+
+<p>
+Smartphone tidak lagi hanya digunakan untuk menelepon dan mengirim pesan.
+Saat ini smartphone menjadi alat utama untuk bekerja, belajar,
+membuat konten, dan mengakses informasi dari seluruh dunia.
+</p>
+
+<p>
+Banyak aplikasi modern memanfaatkan kecerdasan buatan (AI)
+untuk memberikan pengalaman yang lebih personal kepada pengguna.
+</p>
+
+<div class="fact">
+📱 Fakta Menarik: Sebagian besar orang menghabiskan beberapa jam
+setiap hari menggunakan smartphone untuk berbagai aktivitas digital.
+</div>
+
+<h2>Masa Depan Smartphone</h2>
+
+<p>
+Di masa depan, smartphone diperkirakan akan semakin terintegrasi
+dengan teknologi AI, augmented reality (AR), virtual reality (VR),
+dan perangkat pintar lainnya.
+</p>
+
+<p>
+Perkembangan ini akan membuat smartphone menjadi pusat kendali
+berbagai aktivitas digital dalam kehidupan sehari-hari.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 dikurng-kurangi - Smartphone Modern
+</footer>
+
+</body>
+</html>

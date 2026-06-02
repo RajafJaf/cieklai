@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industri 4.0</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+color:white;
+overflow-x:hidden;
+}
+
+/* Tombol Home */
+.home{
+position:fixed;
+top:20px;
+left:20px;
+padding:12px 24px;
+background:#ff9800;
+color:white;
+text-decoration:none;
+font-weight:bold;
+border-radius:50px;
+box-shadow:0 0 20px rgba(255,152,0,.6);
+transition:.3s;
+z-index:999;
+}
+
+.home:hover{
+transform:scale(1.1);
+}
+
+/* Gear Animasi */
+.gear{
+position:absolute;
+border:8px solid #ff9800;
+border-radius:50%;
+animation:spin 10s linear infinite;
+opacity:.3;
+}
+
+.gear1{
+width:120px;
+height:120px;
+top:80px;
+right:80px;
+}
+
+.gear2{
+width:80px;
+height:80px;
+top:170px;
+right:180px;
+animation-direction:reverse;
+}
+
+@keyframes spin{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+/* Hero */
+.hero{
+height:65vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1600");
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.hero h1{
+font-size:75px;
+text-shadow:
+0 0 10px #ff9800,
+0 0 20px #ff9800;
+animation:fadeIn 2s;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.article{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+line-height:2;
+box-shadow:0 0 30px rgba(255,152,0,.15);
+animation:slideUp 1s;
+}
+
+@keyframes slideUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.article h2{
+color:#ffb74d;
+margin-bottom:15px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+padding:25px;
+border-radius:15px;
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px rgba(255,152,0,.5);
+}
+
+.card h3{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.fact{
+margin-top:30px;
+padding:20px;
+background:rgba(255,152,0,.15);
+border-left:5px solid #ff9800;
+border-radius:10px;
+}
+
+.timeline{
+margin-top:30px;
+padding:20px;
+background:rgba(255,255,255,.05);
+border-radius:15px;
+}
+
+.timeline p{
+margin:10px 0;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.8;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<div class="gear gear1"></div>
+<div class="gear gear2"></div>
+
+<section class="hero">
+<h1>Industri 4.0</h1>
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Apa Itu Industri 4.0?</h2>
+
+<p>
+Industri 4.0 adalah revolusi industri generasi keempat yang
+mengintegrasikan teknologi digital, internet, kecerdasan buatan,
+robotika, dan otomatisasi ke dalam proses produksi.
+</p>
+
+<p>
+Tujuannya adalah meningkatkan efisiensi, produktivitas, dan
+fleksibilitas dalam berbagai sektor industri.
+</p>
+
+<h2>Teknologi Utama Industri 4.0</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>🤖</h3>
+<p>Robotika dan Otomasi</p>
+</div>
+
+<div class="card">
+<h3>🧠</h3>
+<p>Artificial Intelligence (AI)</p>
+</div>
+
+<div class="card">
+<h3>☁️</h3>
+<p>Cloud Computing</p>
+</div>
+
+<div class="card">
+<h3>🌐</h3>
+<p>Internet of Things (IoT)</p>
+</div>
+
+</div>
+
+<h2>Perkembangan Revolusi Industri</h2>
+
+<div class="timeline">
+
+<p><b>1.0</b> – Mesin Uap dan Mekanisasi</p>
+
+<p><b>2.0</b> – Listrik dan Produksi Massal</p>
+
+<p><b>3.0</b> – Komputer dan Otomatisasi</p>
+
+<p><b>4.0</b> – Sistem Digital dan AI</p>
+
+</div>
+
+<h2>Manfaat Industri 4.0</h2>
+
+<p>
+✔ Produksi lebih cepat dan efisien.<br>
+✔ Pengurangan biaya operasional.<br>
+✔ Pengambilan keputusan berbasis data.<br>
+✔ Peningkatan kualitas produk.<br>
+✔ Integrasi proses secara real-time.
+</p>
+
+<h2>Tantangan Industri 4.0</h2>
+
+<p>
+Transformasi digital memerlukan investasi teknologi,
+peningkatan keterampilan tenaga kerja, serta keamanan siber
+yang lebih baik.
+</p>
+
+<div class="fact">
+🏭 Fakta Menarik: Banyak pabrik modern sudah menggunakan robot
+dan sensor pintar yang dapat beroperasi selama 24 jam dengan
+pengawasan minimal dari manusia.
+</div>
+
+<h2>Masa Depan Industri 4.0</h2>
+
+<p>
+Perkembangan AI, robotika, dan Internet of Things akan membuat
+sistem industri semakin cerdas dan terhubung.
+</p>
+
+<p>
+Di masa depan, konsep Smart Factory diperkirakan menjadi standar
+baru dalam dunia manufaktur global.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 salin kanan😹 - Industri 4.0
+</footer>
+
+</body>
+</html>

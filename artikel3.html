@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internet Modern</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#00c6ff,#0072ff);
+overflow-x:hidden;
+color:white;
+}
+
+.home{
+position:fixed;
+top:20px;
+left:20px;
+background:white;
+color:#0072ff;
+padding:12px 22px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 20px rgba(255,255,255,.4);
+transition:.3s;
+z-index:1000;
+}
+
+.home:hover{
+transform:scale(1.1);
+}
+
+.hero{
+height:60vh;
+background:
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+animation:slideHero 1.5s ease;
+}
+
+@keyframes slideHero{
+from{
+opacity:0;
+transform:translateY(-50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.hero h1{
+font-size:65px;
+text-shadow:0 0 25px #00c6ff;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.article{
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(12px);
+padding:40px;
+border-radius:25px;
+box-shadow:0 0 30px rgba(255,255,255,.2);
+animation:fadeUp 1s ease;
+line-height:2;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.article h2{
+margin-bottom:15px;
+color:#dff9ff;
+}
+
+.fact{
+margin-top:25px;
+padding:20px;
+background:rgba(255,255,255,.12);
+border-left:5px solid white;
+border-radius:10px;
+}
+
+.stats{
+display:flex;
+gap:20px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.box{
+flex:1;
+min-width:200px;
+background:rgba(255,255,255,.12);
+padding:20px;
+border-radius:15px;
+text-align:center;
+transition:.3s;
+}
+
+.box:hover{
+transform:translateY(-8px);
+}
+
+.box h3{
+font-size:30px;
+margin-bottom:10px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.8;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home">🏠 Home</a>
+
+<section class="hero">
+<h1>Internet Modern</h1>
+</section>
+
+<div class="container">
+
+<div class="article">
+
+<h2>Apa Itu Internet?</h2>
+
+<p>
+Internet adalah jaringan komputer global yang menghubungkan miliaran
+perangkat di seluruh dunia. Dengan internet, pengguna dapat bertukar
+informasi, berkomunikasi, belajar, bekerja, dan mengakses berbagai
+layanan digital secara cepat.
+</p>
+
+<p>
+Sejak pertama kali dikembangkan, internet telah mengalami perkembangan
+yang sangat pesat dan menjadi bagian penting dari kehidupan manusia.
+Saat ini hampir semua sektor memanfaatkan internet untuk meningkatkan
+efisiensi dan produktivitas.
+</p>
+
+<h2>Manfaat Internet Modern</h2>
+
+<p>
+Internet memberikan banyak manfaat dalam berbagai bidang:
+</p>
+
+<p>
+✔ Komunikasi lebih cepat melalui email dan media sosial.<br>
+✔ Pembelajaran online dari berbagai platform pendidikan.<br>
+✔ Belanja dan transaksi digital yang praktis.<br>
+✔ Akses informasi dari seluruh dunia dalam hitungan detik.<br>
+✔ Hiburan seperti video, musik, dan permainan daring.
+</p>
+
+<h2>Dampak Internet</h2>
+
+<p>
+Internet membawa dampak positif dan negatif. Dampak positifnya adalah
+kemudahan akses informasi dan komunikasi. Namun pengguna juga perlu
+waspada terhadap hoaks, penipuan online, dan penyalahgunaan data pribadi.
+</p>
+
+<div class="stats">
+
+<div class="box">
+<h3>5+ Miliar</h3>
+<p>Pengguna Internet Dunia</p>
+</div>
+
+<div class="box">
+<h3>24 Jam</h3>
+<p>Akses Informasi Tanpa Henti</p>
+</div>
+
+<div class="box">
+<h3>Global</h3>
+<p>Terhubung ke Seluruh Dunia</p>
+</div>
+
+</div>
+
+<div class="fact">
+🌐 Fakta Menarik: Internet memungkinkan seseorang di Indonesia
+berkomunikasi secara langsung dengan orang lain di benua berbeda
+hanya dalam hitungan detik.
+</div>
+
+<h2>Masa Depan Internet</h2>
+
+<p>
+Perkembangan teknologi seperti jaringan 5G, Internet of Things (IoT),
+Artificial Intelligence (AI), dan komputasi awan akan membuat internet
+semakin cepat, pintar, dan terintegrasi dalam kehidupan sehari-hari.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 orang Artikel - Internet Modern
+</footer>
+
+</body>
+</html>
