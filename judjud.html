@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot gacor abizz maxwin</title>
+<title>Slot Gacor</title>
 
 <style>
 *{
@@ -11,6 +11,14 @@
     padding:0;
     box-sizing:border-box;
     font-family:Arial,sans-serif;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+input, textarea {
+    user-select: text;
 }
 
 body{
@@ -19,6 +27,7 @@ body{
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,red,gray,cyan);
+    overflow: hidden;
 }
 
 .container{
@@ -26,6 +35,7 @@ body{
     color:white;
     width:95%;
     max-width:700px;
+    transition: transform 0.1s ease;
 }
 
 h1{
@@ -35,19 +45,19 @@ h1{
 .machine{
     display:flex;
     justify-content:center;
-    gap:15px;
+    gap:8px;
     margin:20px 0;
 }
 
 .reel{
-    width:120px;
-    height:120px;
+    width:65px;
+    height:65px;
     overflow:hidden;
     background:white;
-    border-radius:15px;
-    border:4px solid gold;
+    border-radius:10px;
+    border:3px solid gold;
     position:relative;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
+    box-shadow:0 4px 10px rgba(0,0,0,.25);
 }
 
 .reel.spinning{
@@ -64,11 +74,11 @@ h1{
 
 .item{
     width:100%;
-    height:120px;
+    height:65px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:70px;
+    font-size:38px;
     user-select:none;
 }
 
@@ -87,6 +97,11 @@ h1{
 
 .controls{
     margin-top:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 button{
@@ -96,20 +111,89 @@ button{
     border-radius:30px;
     cursor:pointer;
     font-weight:bold;
+    outline: none;
 }
 
 button:hover{
     opacity:.9;
 }
 
+#spinBtn {
+    background-color: #4CAF50;
+    color: white;
+    min-width: 90px;
+}
+
+#autoMenuBtn {
+    background-color: #ff9800;
+    color: white;
+}
+
+#depoBtn:disabled {
+    background-color: #555 !important;
+    color: #aaa;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.btn-stop {
+    background-color: #ff4d4d !important;
+    color: white;
+}
+
 #result{
     margin-top:15px;
     font-size:24px;
     font-weight:bold;
+    min-height: 35px;
+}
+
+/* ==========================================================================
+   CSS ANIMASI PARTIKEL 
+   ========================================================================== */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 999;
+    user-select: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
+}
+.p-triple {
+    animation: floatUp 0.8s ease-out forwards;
+}
+
+@keyframes explodeSpin {
+    0% { transform: translate(0, 0) scale(0.3) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(720deg); opacity: 0; }
+}
+.p-quad {
+    animation: explodeSpin 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes rainDown {
+    0% { transform: translateY(-10vh) scale(0.8) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) scale(1.5) rotate(360deg); opacity: 0; }
+}
+.p-jackpot {
+    animation: rainDown var(--dur) linear forwards;
+}
+
+@keyframes screenShake {
+    0%, 100% { transform: translate(0, 0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-8px, 4px); }
+    20%, 40%, 60%, 80% { transform: translate(8px, -4px); }
+}
+.shake-screen {
+    animation: screenShake 0.5s linear infinite;
 }
 
 /* Modal */
-
 .modal{
     display:none;
     position:fixed;
@@ -117,6 +201,7 @@ button:hover{
     background:rgba(0,0,0,.6);
     justify-content:center;
     align-items:center;
+    z-index: 10;
 }
 
 .modal-content{
@@ -139,22 +224,18 @@ button:hover{
 </head>
 <body>
 
-<div class="container">
+<audio id="bgMusic" src="mahjong-bgm.mp3" loop></audio>
+
+<div class="container" id="mainContainer">
 
     <h1>🀄SLOT GACOR🀄</h1>
 
     <div class="machine">
-        <div class="reel">
-            <div class="track" id="r1"></div>
-        </div>
-
-        <div class="reel">
-            <div class="track" id="r2"></div>
-        </div>
-
-        <div class="reel">
-            <div class="track" id="r3"></div>
-        </div>
+        <div class="reel"><div class="track" id="r0"></div></div>
+        <div class="reel"><div class="track" id="r1"></div></div>
+        <div class="reel"><div class="track" id="r2"></div></div>
+        <div class="reel"><div class="track" id="r3"></div></div>
+        <div class="reel"><div class="track" id="r4"></div></div>
     </div>
 
     <div class="info">
@@ -165,54 +246,34 @@ button:hover{
         <div class="box">
             Bet: <span id="betText">500</span> Poin
         </div>
+        
+        <div class="box" id="autoSpinBox" style="display: none;">
+            Auto: <span id="autoCountText">0</span>x
+        </div>
     </div>
 
     <div class="controls">
-        <button onclick="openDeposit()">
-            depo
-        </button>
-
-        <button onclick="openBet()">
-            Bet
-        </button>
-
-        <button onclick="spin()">
-            SPIN
-        </button>
+        <button id="depoBtn" onclick="openDeposit()">depo</button>
+        <button onclick="openBet()">Bet</button>
+        <button id="spinBtn" onclick="startManualSpin()">SPIN</button>
+        <button id="autoMenuBtn" onclick="openAutoMenu()">AUTO</button>
     </div>
 
     <div id="result"></div>
 
 </div>
 
-<!-- Modal Tambah Poin -->
-
 <div class="modal" id="depositModal">
     <div class="modal-content">
-
-        <h3>deposit</h3>
-
-        <button class="option" onclick="addPoints(10000)">Rp10.000</button>
-        <button class="option" onclick="addPoints(50000)">Rp50.000</button>
+        <h3>deposit (Maks 100k)</h3>
         <button class="option" onclick="addPoints(100000)">Rp100.000</button>
-        <button class="option" onclick="addPoints(200000)">Rp200.000</button>
-        <button class="option" onclick="addPoints(500000)">Rp500.000</button>
-        <button class="option" onclick="addPoints(1000000)">Rp1.000.000</button>
-
-        <button class="option" onclick="closeDeposit()">
-            Tutup
-        </button>
-
+        <button class="option" onclick="closeDeposit()">Tutup</button>
     </div>
 </div>
 
-<!-- Modal Bet -->
-
 <div class="modal" id="betModal">
     <div class="modal-content">
-
         <h3>Pilih Bet</h3>
-
         <button class="option" onclick="setBet(500)">Rp.500</button>
         <button class="option" onclick="setBet(900)">Rp900</button>
         <button class="option" onclick="setBet(1000)">Rp1.000</button>
@@ -220,227 +281,406 @@ button:hover{
         <button class="option" onclick="setBet(10000)">Rp10.000</button>
         <button class="option" onclick="setBet(20000)">Rp20.000</button>
         <button class="option" onclick="setBet(100000)">Rp100.000</button>
+        <button class="option" onclick="closeBet()">Tutup</button>
+    </div>
+</div>
 
-        <button class="option" onclick="closeBet()">
-            Tutup
-        </button>
-
-    
+<div class="modal" id="autoModal">
+    <div class="modal-content">
+        <h3>Pilih Jumlah Auto Spin</h3>
+        <button class="option" onclick="startAutoSpin(10)">Auto Spin 10x</button>
+        <button class="option" onclick="startAutoSpin(20)">Auto Spin 20x</button>
+        <button class="option" onclick="startAutoSpin(50)">Auto Spin 50x</button>
+        <button class="option" onclick="startAutoSpin(100)">Auto Spin 100x</button>
+        <hr style="margin: 10px 0;">
+        <button class="option" onclick="closeAutoMenu()">Batal</button>
+    </div>
 </div>
 
 <script>
-const fruits = [
-    "🀄","🎴","🐉","🐅",
-    //"🍓","🍒","🍍","🥝"
-];
+const emojiSettings = {
+    "🀄": { nama: "Mahjong", x5: 5000, x4: 200, x3: 25 }, 
+    "🐉": { nama: "Naga",    x5: 3000, x4: 150, x3: 18 },  
+    "⚡": { nama: "Zeus",    x5: 2000, x4: 100, x3: 12 }, 
+    "🦊": { nama: "Rubah",   x5: 1500, x4: 80,  x3: 10 },  
+    "⛩️": { nama: "Kuil",    x5: 1000, x4: 50,  x3: 7 },  
+    "🐅": { nama: "Harimau", x5: 500,  x4: 30,  x3: 4 }   
+};
 
-let saldo = 10000;
+const fruits = Object.keys(emojiSettings);
+
+// 🛠️ LOAD SALDO DARI LOCALSTORAGE AGAR TIDAK KE-RESET
+let saldo = localStorage.getItem("slot_saldo") ? parseInt(localStorage.getItem("slot_saldo")) : 10000;
 let bet = 500;
 let spinning = false;
+let autoSpinCount = 0;   
+let isAutoSpinning = false; 
 const intervals = {};
+let cooldownInterval = null;
+
+function playLagu() {
+    const audio = document.getElementById("bgMusic");
+    if (audio.paused) {
+        audio.volume = 0.4;
+        audio.play().catch(err => console.log("Muted autoplay blocked"));
+    }
+}
 
 function randomFruit(){
-    return fruits[
-        Math.floor(Math.random()*fruits.length)
-    ];
+    return fruits[Math.floor(Math.random() * fruits.length)];
+}
+
+function randomFruitExcept(forbiddenArray){
+    const allowed = fruits.filter(f => !forbiddenArray.includes(f));
+    if(allowed.length === 0) return randomFruit();
+    return allowed[Math.floor(Math.random() * allowed.length)];
 }
 
 function createTrack(id){
-
     const track = document.getElementById(id);
-
     track.innerHTML = "";
-
     for(let i=0;i<12;i++){
-
         const div = document.createElement("div");
-
         div.className = "item";
         div.textContent = randomFruit();
-
         track.appendChild(div);
     }
 }
 
-["r1","r2","r3"].forEach(createTrack);
+["r0","r1","r2","r3","r4"].forEach(createTrack);
 
 function startReel(id){
-
     const track = document.getElementById(id);
     const reel = track.parentElement;
-
     reel.classList.add("spinning");
 
     intervals[id] = setInterval(()=>{
-
         const item = document.createElement("div");
-
         item.className = "item";
         item.textContent = randomFruit();
-
         track.prepend(item);
 
         track.style.transition = "none";
-        track.style.transform =
-            "translateY(-120px)";
-
+        track.style.transform = "translateY(-65px)";
         track.offsetHeight;
 
-        track.style.transition =
-            "transform .12s linear";
-
-        track.style.transform =
-            "translateY(0px)";
+        track.style.transition = "transform .12s linear";
+        track.style.transform = "translateY(0px)";
 
         while(track.children.length > 12){
-            track.removeChild(
-                track.lastElementChild
-            );
+            track.removeChild(track.lastElementChild);
         }
-
     },120);
 }
 
-function stopReel(id){
-
+function stopReel(id, forcedFruit = null){
     clearInterval(intervals[id]);
-
     const track = document.getElementById(id);
     const reel = track.parentElement;
-
     reel.classList.remove("spinning");
 
-    const fruit = randomFruit();
-
-    track.innerHTML =
-        `<div class="item">${fruit}</div>`;
-
+    const fruit = forcedFruit ? forcedFruit : randomFruit();
+    track.innerHTML = `<div class="item">${fruit}</div>`;
     return fruit;
 }
 
 function wait(ms){
-    return new Promise(
-        resolve => setTimeout(resolve,ms)
-    );
+    return new Promise(resolve => setTimeout(resolve,ms));
 }
 
 function updateUI(){
+    // Simpan saldo terbaru ke browser setiap kali UI diperbarui
+    localStorage.setItem("slot_saldo", saldo);
 
-    document.getElementById("saldo")
-    .textContent =
-    saldo.toLocaleString("id-ID");
+    document.getElementById("saldo").textContent = saldo.toLocaleString("id-ID");
+    document.getElementById("betText").textContent = bet.toLocaleString("id-ID");
+    
+    const autoBox = document.getElementById("autoSpinBox");
+    const spinBtn = document.getElementById("spinBtn");
+    const autoMenuBtn = document.getElementById("autoMenuBtn");
 
-    document.getElementById("betText")
-    .textContent =
-    bet.toLocaleString("id-ID");
+    if(isAutoSpinning) {
+        autoBox.style.display = "block";
+        document.getElementById("autoCountText").textContent = autoSpinCount;
+        autoMenuBtn.textContent = "STOP";
+        autoMenuBtn.classList.add("btn-stop");
+        autoMenuBtn.setAttribute("onclick", "stopAutoSpin()");
+        spinBtn.style.opacity = "0.5";
+        spinBtn.style.cursor = "not-allowed";
+    } else {
+        autoBox.style.display = "none";
+        autoMenuBtn.textContent = "AUTO";
+        autoMenuBtn.classList.remove("btn-stop");
+        autoMenuBtn.setAttribute("onclick", "openAutoMenu()");
+        spinBtn.style.opacity = "1";
+        spinBtn.style.cursor = "pointer";
+    }
 }
 
-function openDeposit(){
-    document.getElementById(
-        "depositModal"
-    ).style.display="flex";
+/* ==========================================================================
+   ⚙️ ENGINE COOLDOWN DEPOSIT 30 MENIT
+   ========================================================================== */
+function pemicuCooldownDepo(durasiDetik) {
+    const targetWaktu = Date.now() + (durasiDetik * 1000);
+    localStorage.setItem("depo_cooldown_target", targetWaktu);
+    jalankanCountdown();
 }
 
-function closeDeposit(){
-    document.getElementById(
-        "depositModal"
-    ).style.display="none";
+function jalankanCountdown() {
+    const targetWaktu = localStorage.getItem("depo_cooldown_target");
+    if (!targetWaktu) return;
+
+    const depoBtn = document.getElementById("depoBtn");
+
+    if(cooldownInterval) clearInterval(cooldownInterval);
+
+    cooldownInterval = setInterval(() => {
+        const sekarang = Date.now();
+        const sisaWaktu = targetWaktu - sekarang;
+
+        if (sisaWaktu <= 0) {
+            clearInterval(cooldownInterval);
+            localStorage.removeItem("depo_cooldown_target");
+            depoBtn.textContent = "depo";
+            depoBtn.disabled = false;
+        } else {
+            depoBtn.disabled = true;
+            const menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
+            
+            // Format waktu dua digit (Contoh: 05:09)
+            const formatMenit = menit < 10 ? "0" + menit : menit;
+            const formatDetik = detik < 10 ? "0" + detik : detik;
+            
+            depoBtn.textContent = `Depo (${formatMenit}:${formatDetik})`;
+        }
+    }, 1000);
 }
 
-function addPoints(amount){
-    saldo += amount;
+function cekStatusCooldownAwal() {
+    const targetWaktu = localStorage.getItem("depo_cooldown_target");
+    if (targetWaktu && parseInt(targetWaktu) > Date.now()) {
+        jalankanCountdown();
+    }
+}
+
+function openDeposit(){ 
+    playLagu(); 
+    if(!spinning) document.getElementById("depositModal").style.display="flex"; 
+}
+function closeDeposit(){ document.getElementById("depositModal").style.display="none"; }
+
+function addPoints(amount){ 
+    saldo += amount; 
+    updateUI(); 
+    closeDeposit(); 
+    // 🔥 Pasang Cooldown 30 Menit (30 menit = 1800 detik) setelah sukses deposit
+    pemicuCooldownDepo(1800); 
+}
+
+function openBet(){ playLagu(); if(!spinning && !isAutoSpinning) document.getElementById("betModal").style.display="flex"; }
+function closeBet(){ document.getElementById("betModal").style.display="none"; }
+function setBet(value){ bet = value; updateUI(); closeBet(); }
+
+function openAutoMenu(){
+    playLagu();
+    if(spinning || isAutoSpinning) return;
+    document.getElementById("autoModal").style.display = "flex";
+}
+
+function closeAutoMenu(){
+    document.getElementById("autoModal").style.display = "none";
+}
+
+function startManualSpin(){
+    playLagu();
+    if(spinning || isAutoSpinning) return;
+    runSingleSpin();
+}
+
+function startAutoSpin(jumlah){
+    playLagu();
+    closeAutoMenu();
+    autoSpinCount = jumlah;
+    isAutoSpinning = true;
     updateUI();
-    closeDeposit();
+    runSingleSpin();
 }
 
-function openBet(){
-    document.getElementById(
-        "betModal"
-    ).style.display="flex";
-}
-
-function closeBet(){
-    document.getElementById(
-        "betModal"
-    ).style.display="none";
-}
-
-function setBet(value){
-    bet = value;
+function stopAutoSpin(){
+    autoSpinCount = 0;
+    isAutoSpinning = false;
     updateUI();
-    closeBet();
 }
 
-async function spin(){
+function pemicuAnimasiMenang(tipe, emoji) {
+    const totalPartikel = tipe === 5 ? 120 : (tipe === 4 ? 40 : 15);
+    const container = document.getElementById("mainContainer");
 
+    if (tipe === 5) {
+        container.classList.add("shake-screen");
+        setTimeout(() => container.classList.remove("shake-screen"), 2500);
+    }
+
+    for (let i = 0; i < totalPartikel; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.textContent = emoji;
+
+        if (tipe === 3) {
+            p.classList.add("p-triple");
+            p.style.left = (window.innerWidth / 2 - 150 + Math.random() * 300) + "px";
+            p.style.top = (window.innerHeight / 2 - 50 + Math.random() * 100) + "px";
+            p.style.fontSize = (20 + Math.random() * 25) + "px";
+        } else if (tipe === 4) {
+            p.classList.add("p-quad");
+            p.style.left = "50%";
+            p.style.top = "50%";
+            p.style.fontSize = (30 + Math.random() * 25) + "px";
+            
+            const sudut = Math.random() * Math.PI * 2;
+            const jarak = 150 + Math.random() * 250;
+            p.style.setProperty('--tx', Math.cos(sudut) * jarak + "px");
+            p.style.setProperty('--ty', Math.sin(sudut) * jarak + "px");
+        } else if (tipe === 5) {
+            p.classList.add("p-jackpot");
+            p.style.left = (Math.random() * 100) + "vw";
+            p.style.top = "-50px";
+            p.style.fontSize = (35 + Math.random() * 40) + "px";
+            p.style.setProperty('--dur', (1.5 + Math.random() * 2) + "s");
+            p.style.animationDelay = (Math.random() * 1.5) + "s";
+        }
+
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 3500);
+    }
+}
+
+async function runSingleSpin(){
     if(spinning) return;
 
     if(saldo < bet){
-
-        document.getElementById(
-            "result"
-        ).textContent =
-        "❌ saldo tidak cukup";
-
+        document.getElementById("result").textContent = "❌ saldo tidak cukup";
+        stopAutoSpin();
         return;
     }
 
     spinning = true;
-
     saldo -= bet;
     updateUI();
+    document.getElementById("result").textContent = "";
 
-    document.getElementById(
-        "result"
-    ).textContent = "";
-
+    startReel("r0");
     startReel("r1");
     startReel("r2");
     startReel("r3");
-
-    await wait(2500);
-    const a = stopReel("r1");
+    startReel("r4");
 
     await wait(1000);
-    const b = stopReel("r2");
+    let res0 = stopReel("r0");
 
-    await wait(1000);
-    const c = stopReel("r3");
+    await wait(300);
+    let res1 = stopReel("r1");
+
+    await wait(300);
+    let res2 = stopReel("r2");
+
+    let res3 = randomFruit();
+    let res4 = randomFruit();
+
+    function getMaxDuplicate(arr) {
+        let counts = {};
+        arr.forEach(x => counts[x] = (counts[x] || 0) + 1);
+        return Math.max(...Object.values(counts));
+    }
+
+    let initialCombo = getMaxDuplicate([res0, res1, res2, res3, res4]);
+
+    if (initialCombo === 5) {
+        let dice5 = Math.random() * 100;
+        if (dice5 > 2.0) { 
+            initialCombo = 4; 
+        }
+    }
+
+    if (initialCombo === 4) {
+        let dice4 = Math.random() * 100;
+        if (dice4 > 5.0) { 
+            res3 = randomFruitExcept([res0, res1]);
+            res4 = randomFruitExcept([res0, res1, res3]);
+        }
+    }
+
+    let secondaryCombo = getMaxDuplicate([res0, res1, res2, res3, res4]);
+    if (secondaryCombo === 3) {
+        let tripleDice = Math.random() * 100;
+        if (tripleDice > 18.0) { 
+            res3 = randomFruitExcept([res0, res1, res2]);
+            res4 = randomFruitExcept([res0, res1, res2, res3]);
+        }
+    }
+
+    await wait(300);
+    stopReel("r3", res3);
+
+    await wait(300);
+    stopReel("r4", res4);
+
+    let finalResults = [res0, res1, res2, res3, res4];
+    let finalCounts = {};
+    finalResults.forEach(x => finalCounts[x] = (finalCounts[x] || 0) + 1);
+
+    let menangEmoji = "";
+    let jumlahKembar = 0;
+
+    for(let emoji in finalCounts) {
+        if(finalCounts[emoji] > jumlahKembar) {
+            jumlahKembar = finalCounts[emoji];
+            menangEmoji = emoji;
+        }
+    }
 
     let hadiah = 0;
-    let pesan = "ke poke!";
+    let pesan = "❌ coba lagi!"; 
 
-    if(a===b && b===c){
-
-        hadiah = bet * 378.3;
-
-        pesan =
-        `😈GACOR! +${hadiah.toLocaleString("id-ID")} Poin`;
-
-    }else if(
-        a===b ||
-        b===c ||
-        a===c
-    ){
-
-        hadiah = bet * 5.7;
-
-        pesan =
-        `mayan mah! +${hadiah.toLocaleString("id-ID")} Poin`;
+    if (jumlahKembar >= 3) {
+        let keyX = "x" + jumlahKembar; 
+        let pengali = emojiSettings[menangEmoji][keyX];
+        hadiah = Math.floor(bet * pengali);
+        
+        if (jumlahKembar === 5) {
+            pesan = `😈 JACKPOT MUTLAK 5 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+        } else if (jumlahKembar === 4) {
+            pesan = `🔥 MEGA WIN 4 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+        } else if (jumlahKembar === 3) {
+            pesan = `😡GACOR 3 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+        }
+        
+        pemicuAnimasiMenang(jumlahKembar, menangEmoji);
     }
 
     saldo += hadiah;
-
+    spinning = false;
     updateUI();
 
-    document.getElementById(
-        "result"
-    ).textContent = pesan;
+    document.getElementById("result").textContent = pesan;
 
-    spinning = false;
+    if(isAutoSpinning){
+        autoSpinCount--;
+        if(autoSpinCount <= 0){
+            isAutoSpinning = false;
+        }
+        updateUI();
+        if(isAutoSpinning){
+            await wait(1000); 
+            runSingleSpin();
+        }
+    }
 }
 
+// Inisialisasi awal saat halaman dibuka
 updateUI();
+cekStatusCooldownAwal();
 </script>
 
 </body>
