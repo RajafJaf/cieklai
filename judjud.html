@@ -321,7 +321,7 @@ let cooldownInterval = null;
 function playLagu() {
     const audio = document.getElementById("bgMusic");
     if (audio.paused) {
-        audio.volume = 0.4;
+        audio.volume = 0.2;
         audio.play().catch(err => console.log("Muted autoplay blocked"));
     }
 }
@@ -475,7 +475,7 @@ function addPoints(amount){
     updateUI(); 
     closeDeposit(); 
     // 🔥 Pasang Cooldown 30 Menit (30 menit = 1800 detik) setelah sukses deposit
-    pemicuCooldownDepo(1800); 
+    pemicuCooldownDepo(10); 
 }
 
 function openBet(){ playLagu(); if(!spinning && !isAutoSpinning) document.getElementById("betModal").style.display="flex"; }
