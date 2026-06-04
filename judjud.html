@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Gacor</title>
+<title>Slot Gacor Ultra Set - History Version</title>
 
 <style>
 *{
@@ -28,6 +28,7 @@ body{
     align-items:center;
     background:linear-gradient(135deg,red,gray,cyan);
     overflow: hidden;
+    position: relative;
 }
 
 .container{
@@ -35,11 +36,34 @@ body{
     color:white;
     width:95%;
     max-width:700px;
+    position: relative;
     transition: transform 0.1s ease;
+    padding-bottom: 80px;
+}
+
+/* Tombol Riwayat di Pojok Kanan Atas Layar Utama */
+.history-top-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #008cba;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+.history-top-btn:hover {
+    opacity: 0.9;
 }
 
 h1{
     margin-bottom:20px;
+    margin-top: 20px;
 }
 
 .machine{
@@ -129,11 +153,43 @@ button:hover{
     color: white;
 }
 
+#turboBtn {
+    background-color: #9c27b0;
+    color: white;
+}
+#turboBtn.active {
+    background-color: #e91e63;
+    box-shadow: 0 0 10px #e91e63;
+}
+
+#depoBtn {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    margin: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background-color: #4CAF50;
+    color: white;
+}
+
 #depoBtn:disabled {
     background-color: #555 !important;
     color: #aaa;
     cursor: not-allowed;
     opacity: 1;
+    box-shadow: none;
+}
+
+#wdBtn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    margin: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background-color: #00bcd4;
+    color: white;
 }
 
 .btn-stop {
@@ -148,9 +204,28 @@ button:hover{
     min-height: 35px;
 }
 
-/* ==========================================================================
-   CSS ANIMASI PARTIKEL 
-   ========================================================================== */
+/* Style list riwayat di dalam modal */
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 13px;
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.history-item {
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+}
+.history-item:last-child {
+    border-bottom: none;
+}
+.text-depo { color: #4CAF50; font-weight: bold; }
+.text-win { color: #e91e63; font-weight: bold; }
+
+/* Animasi Partikel */
 .particle {
     position: absolute;
     pointer-events: none;
@@ -201,7 +276,7 @@ button:hover{
     background:rgba(0,0,0,.6);
     justify-content:center;
     align-items:center;
-    z-index: 10;
+    z-index: 101;
 }
 
 .modal-content{
@@ -209,7 +284,8 @@ button:hover{
     color:black;
     padding:20px;
     border-radius:15px;
-    width:300px;
+    width:320px;
+    text-align: center;
 }
 
 .modal-content h3{
@@ -220,11 +296,52 @@ button:hover{
     width:100%;
     margin:5px 0;
 }
+
+/* Style Khusus Input & Tampilan Withdraw */
+.wd-input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 12px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+}
+.wd-input:focus {
+    border-color: #00bcd4;
+}
+.wd-label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+    margin-top: 5px;
+}
+.success-checkmark {
+    font-size: 50px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+.wd-success-text {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
 </style>
 </head>
 <body>
 
 <audio id="bgMusic" src="mahjong-bgm.mp3" loop></audio>
+
+<!-- Tombol Riwayat di pojok kanan atas -->
+<button class="history-top-btn" onclick="openHistoryModal()">RIWAYAT</button>
+
+<button id="depoBtn" onclick="openDeposit()">depo</button>
+<button id="wdBtn" onclick="openWithdraw()">Withdraw</button>
 
 <div class="container" id="mainContainer">
 
@@ -240,11 +357,11 @@ button:hover{
 
     <div class="info">
         <div class="box">
-            Saldo: <span id="saldo">10.000</span> Poin
+            Saldo: Rp<span id="saldo">10,00</span>
         </div>
 
         <div class="box">
-            Bet: <span id="betText">500</span> Poin
+            Bet: Rp<span id="betText">0,50</span>
         </div>
         
         <div class="box" id="autoSpinBox" style="display: none;">
@@ -253,9 +370,9 @@ button:hover{
     </div>
 
     <div class="controls">
-        <button id="depoBtn" onclick="openDeposit()">depo</button>
+        <button id="turboBtn" onclick="toggleTurbo()">TURBO: OFF</button>
         <button onclick="openBet()">Bet</button>
-        <button id="spinBtn" onclick="startManualSpin()">SPIN</button>
+        <button id="spinBtn" onclick="handleSpinClick()">SPIN</button>
         <button id="autoMenuBtn" onclick="openAutoMenu()">AUTO</button>
     </div>
 
@@ -265,22 +382,48 @@ button:hover{
 
 <div class="modal" id="depositModal">
     <div class="modal-content">
-        <h3>deposit (Maks 100k)</h3>
-        <button class="option" onclick="addPoints(100000)">Rp100.000</button>
+        <h3>deposit (Maks Rp100,00)</h3>
+        <button class="option" onclick="addPoints(100.00)">Rp100,00</button>
         <button class="option" onclick="closeDeposit()">Tutup</button>
+    </div>
+</div>
+
+<!-- Modal Withdraw Fake Interaktif -->
+<div class="modal" id="withdrawModal">
+    <div class="modal-content">
+        <!-- Tampilan Form Input WD -->
+        <div id="wdFormState">
+            <h3>Form Withdraw</h3>
+            
+            <label class="wd-label">masukkan no dana</label>
+            <input type="text" id="wdDanaInput" class="wd-input" placeholder="Contoh: 08123456xxxx" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            
+            <label class="wd-label">Nominal Penarikan (Rp)</label>
+            <input type="text" id="wdNominalInput" class="wd-input" placeholder="Contoh: 1.000.000,50" oninput="formatWDInput(this)">
+            
+            <button class="option" style="background-color: #00bcd4; color: white;" onclick="prosesWithdraw()">tarik</button>
+            <button class="option" onclick="closeWithdraw()">Batal</button>
+        </div>
+        
+        <!-- Tampilan Sukses Hijau + Centang -->
+        <div id="wdSuccessState" style="display: none;">
+            <div class="success-checkmark">✔</div>
+            <div class="wd-success-text">penarikan berhasil</div>
+            <button class="option" style="background-color: #4CAF50; color: white;" onclick="closeWithdraw()">OK</button>
+        </div>
     </div>
 </div>
 
 <div class="modal" id="betModal">
     <div class="modal-content">
         <h3>Pilih Bet</h3>
-        <button class="option" onclick="setBet(500)">Rp.500</button>
-        <button class="option" onclick="setBet(900)">Rp900</button>
-        <button class="option" onclick="setBet(1000)">Rp1.000</button>
-        <button class="option" onclick="setBet(5000)">Rp5.000</button>
-        <button class="option" onclick="setBet(10000)">Rp10.000</button>
-        <button class="option" onclick="setBet(20000)">Rp20.000</button>
-        <button class="option" onclick="setBet(100000)">Rp100.000</button>
+        <button class="option" onclick="setBet(0.50)">Rp0,50</button>
+        <button class="option" onclick="setBet(0.90)">Rp0,90</button>
+        <button class="option" onclick="setBet(1.00)">Rp1,00</button>
+        <button class="option" onclick="setBet(5.00)">Rp5,00</button>
+        <button class="option" onclick="setBet(10.00)">Rp10,00</button>
+        <button class="option" onclick="setBet(20.00)">Rp20,00</button>
+        <button class="option" onclick="setBet(100.00)">Rp100,00</button>
         <button class="option" onclick="closeBet()">Tutup</button>
     </div>
 </div>
@@ -297,32 +440,44 @@ button:hover{
     </div>
 </div>
 
+<div class="modal" id="historyModal">
+    <div class="modal-content">
+        <h3>Riwayat Transaksi</h3>
+        <div class="history-list" id="historyContainer"></div>
+        <button class="option" style="background:#ff4d4d; color:white;" onclick="clearHistory()">Hapus Riwayat</button>
+        <button class="option" onclick="closeHistoryModal()">Tutup</button>
+    </div>
+</div>
+
 <script>
 const emojiSettings = {
-    "🀄": { nama: "Mahjong", x5: 5000, x4: 200, x3: 25 }, 
-    "🐉": { nama: "Naga",    x5: 3000, x4: 150, x3: 18 },  
-    "⚡": { nama: "Zeus",    x5: 2000, x4: 100, x3: 12 }, 
-    "🦊": { nama: "Rubah",   x5: 1500, x4: 80,  x3: 10 },  
-    "⛩️": { nama: "Kuil",    x5: 1000, x4: 50,  x3: 7 },  
-    "🐅": { nama: "Harimau", x5: 500,  x4: 30,  x3: 4 }   
+    "🀄": { nama: "Mahjong", x5: 473.32, x4: 15, x3: 3   }, 
+    "🐉": { nama: "Naga",    x5: 273.98, x4: 10, x3: 2.5 },  
+    "⚡": { nama: "Zeus",    x5: 50.00,  x4: 8,  x3: 2   }, 
+    "🦊": { nama: "Rubah",   x5: 35.00,  x4: 5,  x3: 1.5 },  
+    "⛩️": { nama: "Kuil",    x5: 25.00,  x4: 3,  x3: 1   },  
+    "🐅": { nama: "Harimau", x5: 20.00,  x4: 2,  x3: 0.5 }   
 };
 
 const fruits = Object.keys(emojiSettings);
 
-// 🛠️ LOAD SALDO DARI LOCALSTORAGE AGAR TIDAK KE-RESET
-let saldo = localStorage.getItem("slot_saldo") ? parseInt(localStorage.getItem("slot_saldo")) : 10000;
-let bet = 500;
+let saldo = localStorage.getItem("slot_saldo") ? parseFloat(localStorage.getItem("slot_saldo")) : 10.00;
+let bet = 0.50;
 let spinning = false;
+let isTurbo = false;
+let forceStopRequested = false; 
 let autoSpinCount = 0;   
 let isAutoSpinning = false; 
 const intervals = {};
 let cooldownInterval = null;
 
+let logsAktivitas = localStorage.getItem("slot_logs") ? JSON.parse(localStorage.getItem("slot_logs")) : [];
+
 function playLagu() {
     const audio = document.getElementById("bgMusic");
-    if (audio.paused) {
+    if (audio && audio.paused) {
         audio.volume = 0.2;
-        audio.play().catch(err => console.log("Muted autoplay blocked"));
+        audio.play().catch(err => console.log("Audio otomatis dilewati."));
     }
 }
 
@@ -354,6 +509,8 @@ function startReel(id){
     const reel = track.parentElement;
     reel.classList.add("spinning");
 
+    const speed = isTurbo ? 60 : 120;
+
     intervals[id] = setInterval(()=>{
         const item = document.createElement("div");
         item.className = "item";
@@ -364,13 +521,13 @@ function startReel(id){
         track.style.transform = "translateY(-65px)";
         track.offsetHeight;
 
-        track.style.transition = "transform .12s linear";
+        track.style.transition = `transform ${speed/1000}s linear`;
         track.style.transform = "translateY(0px)";
 
         while(track.children.length > 12){
             track.removeChild(track.lastElementChild);
         }
-    },120);
+    }, speed);
 }
 
 function stopReel(id, forcedFruit = null){
@@ -385,15 +542,146 @@ function stopReel(id, forcedFruit = null){
 }
 
 function wait(ms){
-    return new Promise(resolve => setTimeout(resolve,ms));
+    const finalMs = isTurbo ? ms * 0.15 : ms;
+    return new Promise(resolve => setTimeout(resolve, finalMs));
+}
+
+function toggleTurbo() {
+    isTurbo = !isTurbo;
+    const turboBtn = document.getElementById("turboBtn");
+    if(isTurbo) {
+        turboBtn.textContent = "TURBO: ON";
+        turboBtn.classList.add("active");
+    } else {
+        turboBtn.textContent = "TURBO: OFF";
+        turboBtn.classList.remove("active");
+    }
+}
+
+function formatMurni(nilai) {
+    return nilai.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function catatRiwayat(tipe, teksNominal) {
+    const waktuSekarang = new Date().toLocaleTimeString("id-ID", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+    logsAktivitas.unshift({ waktu: waktuSekarang, tipe: tipe, detail: teksNominal });
+    
+    if(logsAktivitas.length > 40) logsAktivitas.pop();
+    localStorage.setItem("slot_logs", JSON.stringify(logsAktivitas));
+}
+
+function openHistoryModal() {
+    playLagu();
+    if (spinning) return;
+    
+    const container = document.getElementById("historyContainer");
+    container.innerHTML = "";
+    
+    if(logsAktivitas.length === 0) {
+        container.innerHTML = "<div style='color:gray;text-align:center;padding:10px;'>Belum ada riwayat transaksi.</div>";
+    } else {
+        logsAktivitas.forEach(log => {
+            const div = document.createElement("div");
+            div.className = "history-item";
+            
+            if(log.tipe === "DEPO") {
+                div.innerHTML = `[${log.waktu}] <span class="text-depo">DEPOSIT</span>: +Rp${log.detail}`;
+            } else {
+                div.innerHTML = `[${log.waktu}] <span class="text-win">MENANG</span>: +Rp${log.detail}`;
+            }
+            container.appendChild(div);
+        });
+    }
+    document.getElementById("historyModal").style.display = "flex";
+}
+
+// Tutup riwayat modal
+function closeHistoryModal() {
+    document.getElementById("historyModal").style.display = "none";
+}
+
+function formatWDInput(input) {
+    let cursorPosition = input.selectionStart;
+    let originalLength = input.value.length;
+
+    let value = input.value.replace(/[^0-9,]/g, '');
+    
+    let parts = value.split(',');
+    if (parts.length > 2) {
+        value = parts[0] + ',' + parts.slice(1).join('');
+    }
+    
+    parts = value.split(',');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    
+    input.value = parts.join(',');
+
+    let newLength = input.value.length;
+    cursorPosition = cursorPosition + (newLength - originalLength);
+    input.setSelectionRange(cursorPosition, cursorPosition);
+}
+
+function openWithdraw() {
+    playLagu();
+    if(spinning || isAutoSpinning) return;
+    
+    document.getElementById("wdDanaInput").value = "";
+    document.getElementById("wdNominalInput").value = "";
+    document.getElementById("wdFormState").style.display = "block";
+    document.getElementById("wdSuccessState").style.display = "none";
+    
+    document.getElementById("withdrawModal").style.display = "flex";
+}
+
+function closeWithdraw() {
+    document.getElementById("withdrawModal").style.display = "none";
+}
+
+function prosesWithdraw() {
+    const inputNo = document.getElementById("wdDanaInput").value;
+    const rawNominal = document.getElementById("wdNominalInput").value;
+    
+    if(inputNo.trim() === "") {
+        alert("Silakan masukkan nomor DANA terlebih dahulu!");
+        return;
+    }
+    
+    if(rawNominal.trim() === "") {
+        alert("Masukkan nominal penarikan!");
+        return;
+    }
+    
+    let cleanedNominal = rawNominal.replace(/\./g, '').replace(/,/g, '.');
+    const inputNominal = parseFloat(cleanedNominal);
+    
+    if(isNaN(inputNominal) || inputNominal <= 0) {
+        alert("Masukkan nominal penarikan yang valid!");
+        return;
+    }
+    
+    if(inputNominal > saldo) {
+        alert("Saldo Anda tidak mencukupi untuk melakukan penarikan ini!");
+        return;
+    }
+    
+    saldo -= inputNominal;
+    updateUI(); 
+    
+    document.getElementById("wdFormState").style.display = "none";
+    document.getElementById("wdSuccessState").style.display = "block";
+}
+
+function clearHistory() {
+    logsAktivitas = [];
+    localStorage.removeItem("slot_logs");
+    openHistoryModal();
 }
 
 function updateUI(){
-    // Simpan saldo terbaru ke browser setiap kali UI diperbarui
     localStorage.setItem("slot_saldo", saldo);
 
-    document.getElementById("saldo").textContent = saldo.toLocaleString("id-ID");
-    document.getElementById("betText").textContent = bet.toLocaleString("id-ID");
+    document.getElementById("saldo").textContent = formatMurni(saldo);
+    document.getElementById("betText").textContent = formatMurni(bet);
     
     const autoBox = document.getElementById("autoSpinBox");
     const spinBtn = document.getElementById("spinBtn");
@@ -412,14 +700,21 @@ function updateUI(){
         autoMenuBtn.textContent = "AUTO";
         autoMenuBtn.classList.remove("btn-stop");
         autoMenuBtn.setAttribute("onclick", "openAutoMenu()");
-        spinBtn.style.opacity = "1";
-        spinBtn.style.cursor = "pointer";
+        
+        if (spinning) {
+            spinBtn.textContent = "STOP";
+            spinBtn.classList.add("btn-stop");
+            spinBtn.style.opacity = "1";
+            spinBtn.style.cursor = "pointer";
+        } else {
+            spinBtn.textContent = "SPIN";
+            spinBtn.classList.remove("btn-stop");
+            spinBtn.style.opacity = "1";
+            spinBtn.style.cursor = "pointer";
+        }
     }
 }
 
-/* ==========================================================================
-   ⚙️ ENGINE COOLDOWN DEPOSIT 30 MENIT
-   ========================================================================== */
 function pemicuCooldownDepo(durasiDetik) {
     const targetWaktu = Date.now() + (durasiDetik * 1000);
     localStorage.setItem("depo_cooldown_target", targetWaktu);
@@ -435,8 +730,8 @@ function jalankanCountdown() {
     if(cooldownInterval) clearInterval(cooldownInterval);
 
     cooldownInterval = setInterval(() => {
-        const sekarang = Date.now();
-        const sisaWaktu = targetWaktu - sekarang;
+        const agora = Date.now();
+        const sisaWaktu = targetWaktu - agora;
 
         if (sisaWaktu <= 0) {
             clearInterval(cooldownInterval);
@@ -448,7 +743,6 @@ function jalankanCountdown() {
             const menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
             const detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
             
-            // Format waktu dua digit (Contoh: 05:09)
             const formatMenit = menit < 10 ? "0" + menit : menit;
             const formatDetik = detik < 10 ? "0" + detik : detik;
             
@@ -472,9 +766,9 @@ function closeDeposit(){ document.getElementById("depositModal").style.display="
 
 function addPoints(amount){ 
     saldo += amount; 
+    catatRiwayat("DEPO", formatMurni(amount));
     updateUI(); 
     closeDeposit(); 
-    // 🔥 Pasang Cooldown 30 Menit (30 menit = 1800 detik) setelah sukses deposit
     pemicuCooldownDepo(1800); 
 }
 
@@ -492,29 +786,19 @@ function closeAutoMenu(){
     document.getElementById("autoModal").style.display = "none";
 }
 
-function startManualSpin(){
+function handleSpinClick() {
     playLagu();
-    if(spinning || isAutoSpinning) return;
-    runSingleSpin();
-}
+    if (isAutoSpinning) return;
 
-function startAutoSpin(jumlah){
-    playLagu();
-    closeAutoMenu();
-    autoSpinCount = jumlah;
-    isAutoSpinning = true;
-    updateUI();
-    runSingleSpin();
-}
-
-function stopAutoSpin(){
-    autoSpinCount = 0;
-    isAutoSpinning = false;
-    updateUI();
+    if (!spinning) {
+        runSingleSpin();
+    } else {
+        forceStopRequested = true;
+    }
 }
 
 function pemicuAnimasiMenang(tipe, emoji) {
-    const totalPartikel = tipe === 5 ? 120 : (tipe === 4 ? 40 : 15);
+    const totalPartikel = tipe === 5 ? 35 : (tipe === 4 ? 15 : 6);
     const container = document.getElementById("mainContainer");
 
     if (tipe === 5) {
@@ -556,16 +840,32 @@ function pemicuAnimasiMenang(tipe, emoji) {
     }
 }
 
+function startAutoSpin(jumlah){
+    playLagu();
+    closeAutoMenu();
+    autoSpinCount = jumlah;
+    isAutoSpinning = true;
+    updateUI();
+    runSingleSpin();
+}
+
+function stopAutoSpin(){
+    autoSpinCount = 0;
+    isAutoSpinning = false;
+    updateUI();
+}
+
 async function runSingleSpin(){
     if(spinning) return;
 
     if(saldo < bet){
-        document.getElementById("result").textContent = "❌ saldo tidak cukup";
+        document.getElementById("result").textContent = "pitih ndak adoh bajudi lo mah";
         stopAutoSpin();
         return;
     }
 
     spinning = true;
+    forceStopRequested = false; 
     saldo -= bet;
     updateUI();
     document.getElementById("result").textContent = "";
@@ -576,57 +876,64 @@ async function runSingleSpin(){
     startReel("r3");
     startReel("r4");
 
-    await wait(1000);
-    let res0 = stopReel("r0");
+    let targetCombo = 0; 
+    let winEmoji = "";
+    
+    let rng = Math.random() * 100;
 
-    await wait(300);
-    let res1 = stopReel("r1");
-
-    await wait(300);
-    let res2 = stopReel("r2");
-
-    let res3 = randomFruit();
-    let res4 = randomFruit();
-
-    function getMaxDuplicate(arr) {
-        let counts = {};
-        arr.forEach(x => counts[x] = (counts[x] || 0) + 1);
-        return Math.max(...Object.values(counts));
+    if (rng < 1.0) {          
+        targetCombo = 5; winEmoji = "🀄"; 
+    } else if (rng < 2.0) {   
+        targetCombo = 5; winEmoji = "🐉"; 
+    } else if (rng < 2.75) {   
+        targetCombo = 5; winEmoji = "⚡"; 
+    } else if (rng < 3.50) {   
+        targetCombo = 5; winEmoji = "🦊"; 
+    } else if (rng < 4.25) {  
+        targetCombo = 5; winEmoji = "⛩️"; 
+    } else if (rng < 5.00) {  
+        targetCombo = 5; winEmoji = "🐅"; 
+    } else if (rng < 8.00) {  
+        targetCombo = 4;                 
+    } else if (rng < 16.00) {  
+        targetCombo = 3;                 
+    } else {                  
+        targetCombo = 0;                 
     }
 
-    let initialCombo = getMaxDuplicate([res0, res1, res2, res3, res4]);
-
-    if (initialCombo === 5) {
-        let dice5 = Math.random() * 100;
-        if (dice5 > 2.0) { 
-            initialCombo = 4; 
+    let finalResults = [];
+    if (targetCombo >= 3) {
+        if(winEmoji === "") winEmoji = randomFruit();
+        
+        for (let i = 0; i < targetCombo; i++) {
+            finalResults.push(winEmoji);
         }
-    }
-
-    if (initialCombo === 4) {
-        let dice4 = Math.random() * 100;
-        if (dice4 > 5.0) { 
-            res3 = randomFruitExcept([res0, res1]);
-            res4 = randomFruitExcept([res0, res1, res3]);
+        while (finalResults.length < 5) {
+            finalResults.push(randomFruitExcept([winEmoji]));
         }
+        finalResults.sort(() => Math.random() - 0.5);
+    } else {
+        let e0 = randomFruit();
+        let e1 = randomFruitExcept([e0]);
+        let e2 = randomFruitExcept([e0, e1]);
+        finalResults = [e0, e1, e2, randomFruit(), randomFruit()];
     }
 
-    let secondaryCombo = getMaxDuplicate([res0, res1, res2, res3, res4]);
-    if (secondaryCombo === 3) {
-        let tripleDice = Math.random() * 100;
-        if (tripleDice > 18.0) { 
-            res3 = randomFruitExcept([res0, res1, res2]);
-            res4 = randomFruitExcept([res0, res1, res2, res3]);
-        }
-    }
+    if(!forceStopRequested) await wait(800);
+    stopReel("r0", finalResults[0]);
 
-    await wait(300);
-    stopReel("r3", res3);
+    if(!forceStopRequested) await wait(250);
+    stopReel("r1", finalResults[1]);
 
-    await wait(300);
-    stopReel("r4", res4);
+    if(!forceStopRequested) await wait(250);
+    stopReel("r2", finalResults[2]);
 
-    let finalResults = [res0, res1, res2, res3, res4];
+    if(!forceStopRequested) await wait(250);
+    stopReel("r3", finalResults[3]);
+
+    if(!forceStopRequested) await wait(250);
+    stopReel("r4", finalResults[4]);
+
     let finalCounts = {};
     finalResults.forEach(x => finalCounts[x] = (finalCounts[x] || 0) + 1);
 
@@ -639,28 +946,30 @@ async function runSingleSpin(){
             menangEmoji = emoji;
         }
     }
-
+    
     let hadiah = 0;
-    let pesan = "❌ coba lagi!"; 
+    let pesan = "ZONK! Coba Lagi."; 
 
     if (jumlahKembar >= 3) {
         let keyX = "x" + jumlahKembar; 
         let pengali = emojiSettings[menangEmoji][keyX];
-        hadiah = Math.floor(bet * pengali);
+        hadiah = bet * pengali; 
         
+        catatRiwayat("WIN", `${formatMurni(hadiah)} (${emojiSettings[menangEmoji].nama})`);
+
         if (jumlahKembar === 5) {
-            pesan = `😈 JACKPOT MUTLAK 5 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+            pesan = `😈 JACKPOT MUTLAK 5 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
         } else if (jumlahKembar === 4) {
-            pesan = `🔥 MEGA WIN 4 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+            pesan = `🔥 MEGA WIN 4 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
         } else if (jumlahKembar === 3) {
-            pesan = `😡GACOR 3 KEMBAR (${emojiSettings[menangEmoji].nama})! +${hadiah.toLocaleString("id-ID")} Poin`;
+            pesan = `😡GACOR 3 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
         }
         
         pemicuAnimasiMenang(jumlahKembar, menangEmoji);
     }
-
     saldo += hadiah;
     spinning = false;
+    forceStopRequested = false;
     updateUI();
 
     document.getElementById("result").textContent = pesan;
@@ -672,13 +981,22 @@ async function runSingleSpin(){
         }
         updateUI();
         if(isAutoSpinning){
-            await wait(1000); 
-            runSingleSpin();
+            // UPDATE JEDA COOLDOWN SPIN:
+            // Jika mendapatkan kembar 5, sistem otomatis ditahan selama 4500ms (4.5 detik) agar animasi tuntas.
+            if (jumlahKembar === 5) {
+                await wait(4500); 
+            } else if (jumlahKembar === 4 || jumlahKembar === 3) {
+                await wait(3500); 
+            } else {
+                await wait(1000); 
+            }
+            
+            if (isAutoSpinning) {
+                runSingleSpin();
+            }
         }
     }
 }
-
-// Inisialisasi awal saat halaman dibuka
 updateUI();
 cekStatusCooldownAwal();
 </script>
