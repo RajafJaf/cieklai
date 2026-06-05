@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slots Mahjong Wins - Cloud Ultimate Edition</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         /* ===================================================
            STYLE RESET & VARIABLE DEFINITIONS
@@ -320,10 +322,18 @@
             padding: 25px 20px;
             border-radius: 20px;
             width: 100%;
-            max-width: 320px;
+            max-width: 340px;
             text-align: center;
             border: 2px solid #44335c;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        /* Pembungkus tombol bet agar bisa di-scroll jika daftarnya panjang di HP */
+        .bet-options-container {
+            max-height: 260px;
+            overflow-y: auto;
+            margin: 10px 0;
+            padding-right: 5px;
         }
 
         .modal-content h3 {
@@ -336,8 +346,8 @@
 
         .option {
             width: 100%;
-            margin: 8px 0;
-            padding: 12px;
+            margin: 6px 0;
+            padding: 11px;
             font-weight: bold;
             border-radius: 12px;
             border: 1px solid #44335c;
@@ -447,11 +457,11 @@
 
         <div class="info">
             <div class="box">
-                <div class="box-label">Saldo</div>
+                <div class="box-label">Dompet</div>
                 <div class="box-value highlight">Rp<span id="saldo">0,00</span></div>
             </div>
             <div class="box">
-                <div class="box-label">bet</div>
+                <div class="box-label">Taruhan</div>
                 <div class="box-value">Rp<span id="betText">0,50</span></div>
             </div>
             <div class="box" id="autoSpinBox" style="display: none;">
@@ -483,11 +493,19 @@
     <div class="modal" id="betModal">
         <div class="modal-content">
             <h3>Pilih Jumlah Taruhan</h3>
-            <button class="option" onclick="setBet(0.50)">Rp0,50</button>
-            <button class="option" onclick="setBet(1.00)">Rp1,00</button>
-            <button class="option" onclick="setBet(5.00)">Rp5,00</button>
-            <button class="option" onclick="setBet(10.00)">Rp10,00</button>
-            <button class="option" style="background:#cc2a36; color: white; margin-top:15px; border:none;" onclick="closeBet()">BATAL</button>
+            <div class="bet-options-container">
+                <button class="option" onclick="setBet(0.50)">Rp0,50</button>
+                <button class="option" onclick="setBet(1.00)">Rp1,00</button>
+                <button class="option" onclick="setBet(5.00)">Rp5,00</button>
+                <button class="option" onclick="setBet(10.00)">Rp10,00</button>
+                <button class="option" onclick="setBet(20.00)">Rp20,00</button>
+                <button class="option" onclick="setBet(50.00)">Rp50,00</button>
+                <button class="option" onclick="setBet(100.00)">Rp100,00</button>
+                <button class="option" onclick="setBet(250.00)">Rp250,00</button>
+                <button class="option" onclick="setBet(500.00)">Rp500,00</button>
+                <button class="option" onclick="setBet(750.00)">Rp750,00</button>
+            </div>
+            <button class="option" style="background:#cc2a36; color: white; margin-top:10px; border:none;" onclick="closeBet()">BATAL</button>
         </div>
     </div>
 
@@ -573,7 +591,7 @@
                     let osc = audioCtx.createOscillator();
                     let gain = audioCtx.createGain();
                     osc.type = 'sawtooth';
-                    let freq = j % 2 === 0 ? 587.33 : 880; // Efek nada sirine berselingan tinggi-rendah
+                    let freq = j % 2 === 0 ? 587.33 : 880;
                     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                     gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
@@ -830,7 +848,7 @@
         function pemicuAnimasiMenang(tipe, emoji) {
             const container = document.getElementById("mainContainer");
             if (tipe === 5) {
-                playJackpotSound(); // Memutar efek suara jackpot
+                playJackpotSound();
                 container.classList.add("shake-screen");
                 setTimeout(() => { container.classList.remove("shake-screen"); }, 2500);
                 
@@ -865,7 +883,6 @@
                 return;
             }
 
-            // Memulai loop audio detak putaran mekanis roda
             if (audioCtx.state === 'suspended') audioCtx.resume();
             soundInterval = setInterval(playSpinTickSound, isTurbo ? 40 : 90);
 
@@ -886,7 +903,7 @@
             let winEmoji = "";
             let rng = Math.random() * 100;
 
-            // CHANCE KEMBAR 5 DI BAGI 10 (DARI 0.08% MENJADI 0.008% SETIAP EMOJI)
+            // CHANCE KEMBAR 5 DI BAGI 10 (0.008% SETIAP EMOJI)
             if (rng < 0.008) { targetCombo = 5; winEmoji = "🀄"; } 
             else if (rng < 0.016) { targetCombo = 5; winEmoji = "🐉"; } 
             else if (rng < 0.024) { targetCombo = 5; winEmoji = "⚡"; } 
@@ -930,7 +947,6 @@
             if (!forceStopRequested) await wait(250);
             stopReel("r4", finalResults[4]);
 
-            // Menghentikan efek suara putaran setelah semua roda berhenti bergerak
             clearInterval(soundInterval);
 
             let finalCounts = {};
@@ -955,9 +971,13 @@
             }
 
             saldo += hadiah;
-            localStorage.setItem('slot_saldo', saldo);
             spinning = false;
             updateUI();
+
+            // SINKRONISASI CLOUD LOCAL DATABASE DENGAN SUPABASE
+            try {
+                await supabase.from('users').update({ saldo: saldo }).eq('username', currentUser);
+            } catch(e) {}
 
             if (jumlahKembar === 5) {
                 document.getElementById("jpEmojiBox").textContent = menangEmoji;
