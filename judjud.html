@@ -1,1005 +1,982 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Gacor Ultra Set - History Version</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slots Mahjong Wins - Cloud Ultimate Edition</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
+    <style>
+        /* ===================================================
+           STYLE RESET & VARIABLE DEFINITIONS
+           =================================================== */
+        :root {
+            --gold: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.5);
+            --dark-bg: #0b0c10;
+            --card-bg: #1f2833;
+            --text-light: #c5c6c7;
+            --neon-green: #66fcf1;
+            --neon-red: #ff4d4d;
+            --purple-dark: #1a052e;
+            --purple-light: #05010d;
+        }
 
-input, textarea {
-    user-select: text;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,red,gray,cyan);
-    overflow: hidden;
-    position: relative;
-}
+        input {
+            user-select: text;
+            -webkit-user-select: text;
+        }
 
-.container{
-    text-align:center;
-    color:white;
-    width:95%;
-    max-width:700px;
-    position: relative;
-    transition: transform 0.1s ease;
-    padding-bottom: 80px;
-}
+        select {
+            user-select: text;
+            -webkit-user-select: text;
+        }
 
-/* Tombol Riwayat di Pojok Kanan Atas Layar Utama */
-.history-top-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: #008cba;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    z-index: 100;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-.history-top-btn:hover {
-    opacity: 0.9;
-}
+        /* ===================================================
+           MAIN BODY & BACKGROUND EFFECT
+           =================================================== */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, var(--purple-dark) 0%, var(--purple-light) 100%);
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            color: #ffffff;
+            padding: 15px 10px;
+        }
 
-h1{
-    margin-bottom:20px;
-    margin-top: 20px;
-}
+        .bg-glow {
+            position: absolute;
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-.machine{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin:20px 0;
-}
+        /* ===================================================
+           TAMPILAN GAME INTERFACE UTAMA (OPTIMASI HP)
+           =================================================== */
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            z-index: 5;
+            padding-top: 60px;
+            padding-bottom: 20px;
+        }
 
-.reel{
-    width:65px;
-    height:65px;
-    overflow:hidden;
-    background:white;
-    border-radius:10px;
-    border:3px solid gold;
-    position:relative;
-    box-shadow:0 4px 10px rgba(0,0,0,.25);
-}
+        h1.game-title {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #ffffff 20%, #ffd700 50%, #b39200 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
 
-.reel.spinning{
-    filter:blur(2px);
-}
+        .user-badge {
+            font-size: 12px;
+            margin-bottom: 15px;
+            color: #a193b8;
+        }
 
-.track{
-    position:absolute;
-    width:100%;
-    top:0;
-    left:0;
-    will-change:transform;
-}
+        .user-badge span {
+            color: var(--gold);
+            font-weight: bold;
+        }
 
-.item{
-    width:100%;
-    height:65px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:38px;
-    user-select:none;
-}
+        .depo-top-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(180deg, #00c6ff 0%, #0072ff 100%);
+            color: white;
+            padding: 10px 18px;
+            font-size: 12px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,114,255,0.3);
+            z-index: 10;
+        }
 
-.info{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
+        .depo-top-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
 
-.box{
-    background:rgba(255,255,255,.2);
-    padding:10px 15px;
-    border-radius:10px;
-}
+        /* ===================================================
+           REELS MACHINE MECHANISM VISUAL (OPTIMASI HP)
+           =================================================== */
+        .machine-wrapper {
+            background: linear-gradient(145deg, #2c1a4d, #140b24);
+            padding: 12px 8px;
+            border-radius: 18px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 15px var(--gold-glow);
+            margin: 15px 0;
+            position: relative;
+        }
 
-.controls{
-    margin-top:15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
-}
+        .machine {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
 
-button{
-    padding:12px 20px;
-    margin:5px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    font-weight:bold;
-    outline: none;
-}
+        .reel {
+            width: 18%;
+            max-width: 75px;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff 0%, #e6e6e6 100%);
+            border-radius: 10px;
+            border: 2px solid #44335c;
+            position: relative;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.6), 0 3px 5px rgba(0,0,0,0.3);
+        }
 
-button:hover{
-    opacity:.9;
-}
+        .reel.spinning {
+            filter: blur(3px);
+        }
 
-#spinBtn {
-    background-color: #4CAF50;
-    color: white;
-    min-width: 90px;
-}
+        .track {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            will-change: transform;
+        }
 
-#autoMenuBtn {
-    background-color: #ff9800;
-    color: white;
-}
+        .item {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 7vw;
+            max-size: 44px;
+        }
 
-#turboBtn {
-    background-color: #9c27b0;
-    color: white;
-}
-#turboBtn.active {
-    background-color: #e91e63;
-    box-shadow: 0 0 10px #e91e63;
-}
+        @media (min-width: 480px) {
+            .item { font-size: 38px; }
+            h1.game-title { font-size: 34px; }
+        }
 
-#depoBtn {
-    position: fixed;
-    bottom: 15px;
-    left: 15px;
-    margin: 0;
-    z-index: 100;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    background-color: #4CAF50;
-    color: white;
-}
+        /* ===================================================
+           DASHBOARD INFORMATION DISPLAY BOXES
+           =================================================== */
+        .info {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
 
-#depoBtn:disabled {
-    background-color: #555 !important;
-    color: #aaa;
-    cursor: not-allowed;
-    opacity: 1;
-    box-shadow: none;
-}
+        .box {
+            background: rgba(20, 10, 35, 0.8);
+            padding: 10px 5px;
+            border-radius: 10px;
+            border: 1.5px solid #44335c;
+            flex: 1;
+            min-width: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
 
-#wdBtn {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    margin: 0;
-    z-index: 100;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    background-color: #00bcd4;
-    color: white;
-}
+        .box-label {
+            font-size: 9px;
+            color: #a193b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-.btn-stop {
-    background-color: #ff4d4d !important;
-    color: white;
-}
+        .box-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-#result{
-    margin-top:15px;
-    font-size:24px;
-    font-weight:bold;
-    min-height: 35px;
-}
+        .box-value.highlight {
+            color: #50fa7b;
+            text-shadow: 0 0 8px rgba(80,250,123,0.3);
+        }
 
-/* Style list riwayat di dalam modal */
-.history-list {
-    max-height: 200px;
-    overflow-y: auto;
-    text-align: left;
-    font-size: 13px;
-    margin: 10px 0;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-.history-item {
-    padding: 4px 0;
-    border-bottom: 1px dashed #eee;
-}
-.history-item:last-child {
-    border-bottom: none;
-}
-.text-depo { color: #4CAF50; font-weight: bold; }
-.text-win { color: #e91e63; font-weight: bold; }
+        /* ===================================================
+           GAME CONTROLS BUTTONS DESIGN
+           =================================================== */
+        .controls {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
 
-/* Animasi Partikel */
-.particle {
-    position: absolute;
-    pointer-events: none;
-    z-index: 999;
-    user-select: none;
-}
+        .btn-control {
+            padding: 12px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
 
-@keyframes floatUp {
-    0% { transform: translateY(0) scale(0.5); opacity: 1; }
-    100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
-}
-.p-triple {
-    animation: floatUp 0.8s ease-out forwards;
-}
+        #spinBtn {
+            grid-column: span 2;
+            background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            font-size: 18px;
+            padding: 14px 10px;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 0 12px rgba(46,204,113,0.4);
+            border-radius: 30px;
+        }
 
-@keyframes explodeSpin {
-    0% { transform: translate(0, 0) scale(0.3) rotate(0deg); opacity: 1; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(720deg); opacity: 0; }
-}
-.p-quad {
-    animation: explodeSpin 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-}
+        #turboBtn {
+            background: linear-gradient(180deg, #7f8c8d 0%, #34495e 100%);
+            color: white;
+        }
 
-@keyframes rainDown {
-    0% { transform: translateY(-10vh) scale(0.8) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(110vh) scale(1.5) rotate(360deg); opacity: 0; }
-}
-.p-jackpot {
-    animation: rainDown var(--dur) linear forwards;
-}
+        #turboBtn.active {
+            background: linear-gradient(180deg, #9b59b6 0%, #8e44ad 100%);
+            box-shadow: 0 0 12px rgba(155,89,182,0.6);
+            border: 1px solid #9b59b6;
+        }
 
-@keyframes screenShake {
-    0%, 100% { transform: translate(0, 0); }
-    10%, 30%, 50%, 70%, 90% { transform: translate(-8px, 4px); }
-    20%, 40%, 60%, 80% { transform: translate(8px, -4px); }
-}
-.shake-screen {
-    animation: screenShake 0.5s linear infinite;
-}
+        #autoMenuBtn {
+            background: linear-gradient(180deg, #f39c12 0%, #d35400 100%);
+            color: white;
+        }
 
-/* Modal */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    justify-content:center;
-    align-items:center;
-    z-index: 101;
-}
+        .btn-bet-custom {
+            background: #34495e; 
+            color: white;
+            grid-column: span 2;
+        }
 
-.modal-content{
-    background:white;
-    color:black;
-    padding:20px;
-    border-radius:15px;
-    width:320px;
-    text-align: center;
-}
+        #result {
+            margin-top: 15px;
+            font-size: 24px;
+            font-weight: 900;
+            min-height: 35px;
+            background: linear-gradient(to right, #00ffcc, #00ff66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,255,200,0.3);
+        }
 
-.modal-content h3{
-    margin-bottom:10px;
-}
+        /* ===================================================
+           MODAL DIALOG DICTIONARY CONFIGURATIONS
+           =================================================== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            backdrop-filter: blur(6px);
+            padding: 20px;
+        }
 
-.option{
-    width:100%;
-    margin:5px 0;
-}
+        .modal-content {
+            background: #151026;
+            color: white;
+            padding: 25px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            border: 2px solid #44335c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
 
-/* Style Khusus Input & Tampilan Withdraw */
-.wd-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 12px 0;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 15px;
-    text-align: center;
-    outline: none;
-}
-.wd-input:focus {
-    border-color: #00bcd4;
-}
-.wd-label {
-    display: block;
-    text-align: left;
-    font-size: 13px;
-    font-weight: bold;
-    color: #555;
-    margin-top: 5px;
-}
-.success-checkmark {
-    font-size: 50px;
-    color: #4CAF50;
-    margin-bottom: 10px;
-    line-height: 1;
-}
-.wd-success-text {
-    color: #4CAF50;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-</style>
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .option {
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 12px;
+            border: 1px solid #44335c;
+            cursor: pointer;
+            background: #23193d;
+            color: white;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .depo-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #44335c;
+            background: #120a21;
+            color: white;
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* ===================================================
+           TAMPILAN SPECIAL ULTRA CELEBRATION MODAL JACKPOT
+           =================================================== */
+        #jackpotModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .jp-card {
+            background: radial-gradient(circle, #2d0a4e 0%, #110322 100%);
+            color: gold;
+            border: 4px solid var(--gold);
+            width: 100%;
+            max-width: 360px;
+            padding: 30px 20px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 40px var(--gold), inset 0 0 25px rgba(255,215,0,0.2);
+            position: relative;
+            animation: popUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.4); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        #jpEmojiBox {
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            margin: 0 auto 20px auto;
+            background: white;
+            border: 3px solid var(--gold);
+            border-radius: 18px;
+            font-size: 50px;
+            box-shadow: 0 0 25px rgba(255,255,255,0.85), inset 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        #jpCounterText {
+            font-size: 30px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 12px #2ecc71, 0 0 4px #2ecc71;
+            margin-bottom: 25px;
+        }
+
+        .shake-screen {
+            animation: screenShake 0.4s linear infinite;
+        }
+
+        @keyframes screenShake {
+            0%, 100% { transform: translate(0, 0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 2px); }
+            20%, 40%, 60%, 80% { transform: translate(3px, -2px); }
+        }
+    </style>
 </head>
 <body>
 
-<audio id="bgMusic" src="mahjong-bgm.mp3" loop></audio>
+    <div class="bg-glow"></div>
 
-<!-- Tombol Riwayat di pojok kanan atas -->
-<button class="history-top-btn" onclick="openHistoryModal()">RIWAYAT</button>
+    <button class="depo-top-btn" id="depoTopBtn" onclick="openDepo()">DEPOSIT</button>
 
-<button id="depoBtn" onclick="openDeposit()">depo</button>
-<button id="wdBtn" onclick="openWithdraw()">Withdraw</button>
+    <div class="container" id="mainContainer">
+        <h1 class="game-title">MAHJONG WINS</h1>
+        <div class="user-badge">Mode Bermain: <span>GUEST PLAYER</span></div>
 
-<div class="container" id="mainContainer">
-
-    <h1>🀄SLOT GACOR🀄</h1>
-
-    <div class="machine">
-        <div class="reel"><div class="track" id="r0"></div></div>
-        <div class="reel"><div class="track" id="r1"></div></div>
-        <div class="reel"><div class="track" id="r2"></div></div>
-        <div class="reel"><div class="track" id="r3"></div></div>
-        <div class="reel"><div class="track" id="r4"></div></div>
-    </div>
-
-    <div class="info">
-        <div class="box">
-            Saldo: Rp<span id="saldo">10,00</span>
+        <div class="machine-wrapper">
+            <div class="machine">
+                <div class="reel"><div class="track" id="r0"></div></div>
+                <div class="reel"><div class="track" id="r1"></div></div>
+                <div class="reel"><div class="track" id="r2"></div></div>
+                <div class="reel"><div class="track" id="r3"></div></div>
+                <div class="reel"><div class="track" id="r4"></div></div>
+            </div>
         </div>
 
-        <div class="box">
-            Bet: Rp<span id="betText">0,50</span>
+        <div class="info">
+            <div class="box">
+                <div class="box-label">Saldo</div>
+                <div class="box-value highlight">Rp<span id="saldo">0,00</span></div>
+            </div>
+            <div class="box">
+                <div class="box-label">bet</div>
+                <div class="box-value">Rp<span id="betText">0,50</span></div>
+            </div>
+            <div class="box" id="autoSpinBox" style="display: none;">
+                <div class="box-label">Sisa Auto</div>
+                <div class="box-value" style="color:var(--gold);"><span id="autoCountText">0</span>x</div>
+            </div>
         </div>
-        
-        <div class="box" id="autoSpinBox" style="display: none;">
-            Auto: <span id="autoCountText">0</span>x
-        </div>
-    </div>
 
-    <div class="controls">
-        <button id="turboBtn" onclick="toggleTurbo()">TURBO: OFF</button>
-        <button onclick="openBet()">Bet</button>
-        <button id="spinBtn" onclick="handleSpinClick()">SPIN</button>
-        <button id="autoMenuBtn" onclick="openAutoMenu()">AUTO</button>
-    </div>
-
-    <div id="result"></div>
-
-</div>
-
-<div class="modal" id="depositModal">
-    <div class="modal-content">
-        <h3>deposit (Maks Rp100,00)</h3>
-        <button class="option" onclick="addPoints(100.00)">Rp100,00</button>
-        <button class="option" onclick="closeDeposit()">Tutup</button>
-    </div>
-</div>
-
-<!-- Modal Withdraw Fake Interaktif -->
-<div class="modal" id="withdrawModal">
-    <div class="modal-content">
-        <!-- Tampilan Form Input WD -->
-        <div id="wdFormState">
-            <h3>Form Withdraw</h3>
-            
-            <label class="wd-label">masukkan no dana</label>
-            <input type="text" id="wdDanaInput" class="wd-input" placeholder="Contoh: 08123456xxxx" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-            
-            <label class="wd-label">Nominal Penarikan (Rp)</label>
-            <input type="text" id="wdNominalInput" class="wd-input" placeholder="Contoh: 1.000.000,50" oninput="formatWDInput(this)">
-            
-            <button class="option" style="background-color: #00bcd4; color: white;" onclick="prosesWithdraw()">tarik</button>
-            <button class="option" onclick="closeWithdraw()">Batal</button>
+        <div class="controls">
+            <button id="turboBtn" class="btn-control" onclick="toggleTurbo()">TURBO: OFF</button>
+            <button id="autoMenuBtn" class="btn-control" onclick="openAutoMenu()">AUTO</button>
+            <button class="btn-control btn-bet-custom" onclick="openBet()">UBAH BET</button>
+            <button id="spinBtn" class="btn-control" onclick="handleSpinClick()">SPIN</button>
         </div>
         
-        <!-- Tampilan Sukses Hijau + Centang -->
-        <div id="wdSuccessState" style="display: none;">
-            <div class="success-checkmark">✔</div>
-            <div class="wd-success-text">penarikan berhasil</div>
-            <button class="option" style="background-color: #4CAF50; color: white;" onclick="closeWithdraw()">OK</button>
+        <div id="result"></div>
+    </div>
+
+    <div class="modal" id="depoModal">
+        <div class="modal-content">
+            <h3>Menu Deposit</h3>
+            <p style="font-size: 12px; color: #a193b8; margin-bottom: 15px;">Maksimal Rp100,00 per jam</p>
+            <input type="number" id="depoAmount" class="depo-input" placeholder="Masukkan Jumlah (Max 100)" min="0.01" max="100" step="0.01">
+            <button class="option" style="background: #2ecc71; color: white; border: none;" onclick="prosesDepo()">DEPOSIT SEKARANG</button>
+            <button class="option" style="background:#cc2a36; color: white; margin-top:10px; border:none;" onclick="closeDepo()">BATAL</button>
         </div>
     </div>
-</div>
 
-<div class="modal" id="betModal">
-    <div class="modal-content">
-        <h3>Pilih Bet</h3>
-        <button class="option" onclick="setBet(0.50)">Rp0,50</button>
-        <button class="option" onclick="setBet(0.90)">Rp0,90</button>
-        <button class="option" onclick="setBet(1.00)">Rp1,00</button>
-        <button class="option" onclick="setBet(5.00)">Rp5,00</button>
-        <button class="option" onclick="setBet(10.00)">Rp10,00</button>
-        <button class="option" onclick="setBet(20.00)">Rp20,00</button>
-        <button class="option" onclick="setBet(100.00)">Rp100,00</button>
-        <button class="option" onclick="closeBet()">Tutup</button>
+    <div class="modal" id="betModal">
+        <div class="modal-content">
+            <h3>Pilih Jumlah Taruhan</h3>
+            <button class="option" onclick="setBet(0.50)">Rp0,50</button>
+            <button class="option" onclick="setBet(1.00)">Rp1,00</button>
+            <button class="option" onclick="setBet(5.00)">Rp5,00</button>
+            <button class="option" onclick="setBet(10.00)">Rp10,00</button>
+            <button class="option" style="background:#cc2a36; color: white; margin-top:15px; border:none;" onclick="closeBet()">BATAL</button>
+        </div>
     </div>
-</div>
 
-<div class="modal" id="autoModal">
-    <div class="modal-content">
-        <h3>Pilih Jumlah Auto Spin</h3>
-        <button class="option" onclick="startAutoSpin(10)">Auto Spin 10x</button>
-        <button class="option" onclick="startAutoSpin(20)">Auto Spin 20x</button>
-        <button class="option" onclick="startAutoSpin(50)">Auto Spin 50x</button>
-        <button class="option" onclick="startAutoSpin(100)">Auto Spin 100x</button>
-        <hr style="margin: 10px 0;">
-        <button class="option" onclick="closeAutoMenu()">Batal</button>
+    <div class="modal" id="autoModal">
+        <div class="modal-content">
+            <h3>Pilih Putaran Otomatis</h3>
+            <button class="option" onclick="startAutoSpin(10)">Auto Spin 10x</button>
+            <button class="option" onclick="startAutoSpin(50)">Auto Spin 50x</button>
+            <button class="option" onclick="startAutoSpin(100)">Auto Spin 100x</button>
+            <button class="option" style="background:#cc2a36; color: white; margin-top:15px; border:none;" onclick="closeAutoMenu()">BATAL</button>
+        </div>
     </div>
-</div>
 
-<div class="modal" id="historyModal">
-    <div class="modal-content">
-        <h3>Riwayat Transaksi</h3>
-        <div class="history-list" id="historyContainer"></div>
-        <button class="option" style="background:#ff4d4d; color:white;" onclick="clearHistory()">Hapus Riwayat</button>
-        <button class="option" onclick="closeHistoryModal()">Tutup</button>
+    <div class="modal" id="jackpotModal">
+        <div class="jp-card">
+            <h2 style="font-size: 22px; text-shadow: 0 0 15px rgba(255,215,0,0.6); margin-bottom: 5px; letter-spacing: 1px;">🎉 GRAND JACKPOT 🎉</h2>
+            <h3 style="color: #ffffff; margin-bottom: 15px; font-size:13px; letter-spacing:1px;">5 KEMBAR IDENTIK MUTLAK</h3>
+            
+            <div id="jpEmojiBox">🀄</div>
+            
+            <p style="color: #a193b8; font-size: 11px; margin-bottom: 4px; text-transform:uppercase;">Kemenangan Bersih:</p>
+            <div id="jpCounterText">Rp0,00</div>
+            
+            <button class="option" style="background: linear-gradient(180deg, #ffe600 0%, #b3a200 100%); color: black; font-size: 14px; padding: 12px; border:none; box-shadow:0 5px 15px rgba(0,0,0,0.4);" onclick="closeJackpotModal()">AMBIL HADIAH CASH</button>
+        </div>
     </div>
-</div>
 
-<script>
-const emojiSettings = {
-    "🀄": { nama: "Mahjong", x5: 473.32, x4: 15, x3: 3   }, 
-    "🐉": { nama: "Naga",    x5: 273.98, x4: 10, x3: 2.5 },  
-    "⚡": { nama: "Zeus",    x5: 50.00,  x4: 8,  x3: 2   }, 
-    "🦊": { nama: "Rubah",   x5: 35.00,  x4: 5,  x3: 1.5 },  
-    "⛩️": { nama: "Kuil",    x5: 25.00,  x4: 3,  x3: 1   },  
-    "🐅": { nama: "Harimau", x5: 20.00,  x4: 2,  x3: 0.5 }   
-};
+    <script>
+        // =========================================================================
+        // DATA DICTIONARY HADIAH 11 EMOJI MAHJONG WINS
+        // =========================================================================
+        const emojiSettings = {
+            "🀄": { nama: "Green Mahjong", x5: 9173.32, x4: 8.80, x3: 1.50 },
+            "🐉": { nama: "Dragon Red", x5: 1888.88, x4: 6.50, x3: 1.20 },
+            "⚡": { nama: "Zeus Spark", x5: 750.00, x4: 5.00, x3: 1.00 },
+            "👹": { nama: "Oni Mask", x5: 350.00, x4: 4.50, x3: 0.90 },
+            "🎭": { nama: "Kabuki Face", x5: 180.00, x4: 3.80, x3: 0.75 },
+            "🪙": { nama: "Gold Coin", x5: 95.50, x4: 2.80, x3: 0.60 },
+            "⛩️": { nama: "Torii Gate", x5: 60.00, x4: 2.20, x3: 0.50 },
+            "🐅": { nama: "Tiger Claw", x5: 45.00, x4: 1.80, x3: 0.40 },
+            "🌸": { nama: "Sakura Bloom", x5: 30.00, x4: 1.50, x3: 0.30 },
+            "🏮": { nama: "Red Lantern", x5: 20.00, x4: 1.00, x3: 0.20 },
+            "🎋": { nama: "Lucky Bamboo", x5: 15.00, x4: 0.80, x3: 0.15 }
+        };
+        
+        const fruits = Object.keys(emojiSettings);
 
-const fruits = Object.keys(emojiSettings);
+        let saldo = parseFloat(localStorage.getItem('slot_saldo')) || 10.00;
+        let bet = 0.50;
+        let spinning = false;
+        let isTurbo = false;
+        let forceStopRequested = false;
+        let autoSpinCount = 0;
+        let isAutoSpinning = false;
+        const intervals = {};
+        let jackpotPromiseResolver = null;
+        let soundInterval = null;
 
-let saldo = localStorage.getItem("slot_saldo") ? parseFloat(localStorage.getItem("slot_saldo")) : 10.00;
-let bet = 0.50;
-let spinning = false;
-let isTurbo = false;
-let forceStopRequested = false; 
-let autoSpinCount = 0;   
-let isAutoSpinning = false; 
-const intervals = {};
-let cooldownInterval = null;
+        // SYSTEM WEB AUDIO API ENGINE UNTUK MENGHASILKAN SUARA SECARA SINTETIS TANPA FILE MP3
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-let logsAktivitas = localStorage.getItem("slot_logs") ? JSON.parse(localStorage.getItem("slot_logs")) : [];
-
-function playLagu() {
-    const audio = document.getElementById("bgMusic");
-    if (audio && audio.paused) {
-        audio.volume = 0.2;
-        audio.play().catch(err => console.log("Audio otomatis dilewati."));
-    }
-}
-
-function randomFruit(){
-    return fruits[Math.floor(Math.random() * fruits.length)];
-}
-
-function randomFruitExcept(forbiddenArray){
-    const allowed = fruits.filter(f => !forbiddenArray.includes(f));
-    if(allowed.length === 0) return randomFruit();
-    return allowed[Math.floor(Math.random() * allowed.length)];
-}
-
-function createTrack(id){
-    const track = document.getElementById(id);
-    track.innerHTML = "";
-    for(let i=0;i<12;i++){
-        const div = document.createElement("div");
-        div.className = "item";
-        div.textContent = randomFruit();
-        track.appendChild(div);
-    }
-}
-
-["r0","r1","r2","r3","r4"].forEach(createTrack);
-
-function startReel(id){
-    const track = document.getElementById(id);
-    const reel = track.parentElement;
-    reel.classList.add("spinning");
-
-    const speed = isTurbo ? 60 : 120;
-
-    intervals[id] = setInterval(()=>{
-        const item = document.createElement("div");
-        item.className = "item";
-        item.textContent = randomFruit();
-        track.prepend(item);
-
-        track.style.transition = "none";
-        track.style.transform = "translateY(-65px)";
-        track.offsetHeight;
-
-        track.style.transition = `transform ${speed/1000}s linear`;
-        track.style.transform = "translateY(0px)";
-
-        while(track.children.length > 12){
-            track.removeChild(track.lastElementChild);
+        function playSpinTickSound() {
+            try {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.04);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch(e) {}
         }
-    }, speed);
-}
 
-function stopReel(id, forcedFruit = null){
-    clearInterval(intervals[id]);
-    const track = document.getElementById(id);
-    const reel = track.parentElement;
-    reel.classList.remove("spinning");
+        function playJackpotSound() {
+            try {
+                let j = 0;
+                let interval = setInterval(() => {
+                    if (j > 12) { clearInterval(interval); return; }
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    let freq = j % 2 === 0 ? 587.33 : 880; // Efek nada sirine berselingan tinggi-rendah
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.15);
+                    j++;
+                }, 150);
+            } catch(e) {}
+        }
 
-    const fruit = forcedFruit ? forcedFruit : randomFruit();
-    track.innerHTML = `<div class="item">${fruit}</div>`;
-    return fruit;
-}
+        function formatMurni(nilai) {
+            return nilai.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
-function wait(ms){
-    const finalMs = isTurbo ? ms * 0.15 : ms;
-    return new Promise(resolve => setTimeout(resolve, finalMs));
-}
-
-function toggleTurbo() {
-    isTurbo = !isTurbo;
-    const turboBtn = document.getElementById("turboBtn");
-    if(isTurbo) {
-        turboBtn.textContent = "TURBO: ON";
-        turboBtn.classList.add("active");
-    } else {
-        turboBtn.textContent = "TURBO: OFF";
-        turboBtn.classList.remove("active");
-    }
-}
-
-function formatMurni(nilai) {
-    return nilai.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-function catatRiwayat(tipe, teksNominal) {
-    const waktuSekarang = new Date().toLocaleTimeString("id-ID", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-    logsAktivitas.unshift({ waktu: waktuSekarang, tipe: tipe, detail: teksNominal });
-    
-    if(logsAktivitas.length > 40) logsAktivitas.pop();
-    localStorage.setItem("slot_logs", JSON.stringify(logsAktivitas));
-}
-
-function openHistoryModal() {
-    playLagu();
-    if (spinning) return;
-    
-    const container = document.getElementById("historyContainer");
-    container.innerHTML = "";
-    
-    if(logsAktivitas.length === 0) {
-        container.innerHTML = "<div style='color:gray;text-align:center;padding:10px;'>Belum ada riwayat transaksi.</div>";
-    } else {
-        logsAktivitas.forEach(log => {
-            const div = document.createElement("div");
-            div.className = "history-item";
-            
-            if(log.tipe === "DEPO") {
-                div.innerHTML = `[${log.waktu}] <span class="text-depo">DEPOSIT</span>: +Rp${log.detail}`;
-            } else {
-                div.innerHTML = `[${log.waktu}] <span class="text-win">MENANG</span>: +Rp${log.detail}`;
+        // =========================================================================
+        // DEPOSIT CONTROLLER (BATAS BARU: 100,00)
+        // =========================================================================
+        function openDepo() {
+            if (!spinning && !isAutoSpinning) {
+                document.getElementById("depoModal").style.display = "flex";
             }
-            container.appendChild(div);
-        });
-    }
-    document.getElementById("historyModal").style.display = "flex";
-}
-
-// Tutup riwayat modal
-function closeHistoryModal() {
-    document.getElementById("historyModal").style.display = "none";
-}
-
-function formatWDInput(input) {
-    let cursorPosition = input.selectionStart;
-    let originalLength = input.value.length;
-
-    let value = input.value.replace(/[^0-9,]/g, '');
-    
-    let parts = value.split(',');
-    if (parts.length > 2) {
-        value = parts[0] + ',' + parts.slice(1).join('');
-    }
-    
-    parts = value.split(',');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
-    input.value = parts.join(',');
-
-    let newLength = input.value.length;
-    cursorPosition = cursorPosition + (newLength - originalLength);
-    input.setSelectionRange(cursorPosition, cursorPosition);
-}
-
-function openWithdraw() {
-    playLagu();
-    if(spinning || isAutoSpinning) return;
-    
-    document.getElementById("wdDanaInput").value = "";
-    document.getElementById("wdNominalInput").value = "";
-    document.getElementById("wdFormState").style.display = "block";
-    document.getElementById("wdSuccessState").style.display = "none";
-    
-    document.getElementById("withdrawModal").style.display = "flex";
-}
-
-function closeWithdraw() {
-    document.getElementById("withdrawModal").style.display = "none";
-}
-
-function prosesWithdraw() {
-    const inputNo = document.getElementById("wdDanaInput").value;
-    const rawNominal = document.getElementById("wdNominalInput").value;
-    
-    if(inputNo.trim() === "") {
-        alert("Silakan masukkan nomor DANA terlebih dahulu!");
-        return;
-    }
-    
-    if(rawNominal.trim() === "") {
-        alert("Masukkan nominal penarikan!");
-        return;
-    }
-    
-    let cleanedNominal = rawNominal.replace(/\./g, '').replace(/,/g, '.');
-    const inputNominal = parseFloat(cleanedNominal);
-    
-    if(isNaN(inputNominal) || inputNominal <= 0) {
-        alert("Masukkan nominal penarikan yang valid!");
-        return;
-    }
-    
-    if(inputNominal > saldo) {
-        alert("Saldo Anda tidak mencukupi untuk melakukan penarikan ini!");
-        return;
-    }
-    
-    saldo -= inputNominal;
-    updateUI(); 
-    
-    document.getElementById("wdFormState").style.display = "none";
-    document.getElementById("wdSuccessState").style.display = "block";
-}
-
-function clearHistory() {
-    logsAktivitas = [];
-    localStorage.removeItem("slot_logs");
-    openHistoryModal();
-}
-
-function updateUI(){
-    localStorage.setItem("slot_saldo", saldo);
-
-    document.getElementById("saldo").textContent = formatMurni(saldo);
-    document.getElementById("betText").textContent = formatMurni(bet);
-    
-    const autoBox = document.getElementById("autoSpinBox");
-    const spinBtn = document.getElementById("spinBtn");
-    const autoMenuBtn = document.getElementById("autoMenuBtn");
-
-    if(isAutoSpinning) {
-        autoBox.style.display = "block";
-        document.getElementById("autoCountText").textContent = autoSpinCount;
-        autoMenuBtn.textContent = "STOP";
-        autoMenuBtn.classList.add("btn-stop");
-        autoMenuBtn.setAttribute("onclick", "stopAutoSpin()");
-        spinBtn.style.opacity = "0.5";
-        spinBtn.style.cursor = "not-allowed";
-    } else {
-        autoBox.style.display = "none";
-        autoMenuBtn.textContent = "AUTO";
-        autoMenuBtn.classList.remove("btn-stop");
-        autoMenuBtn.setAttribute("onclick", "openAutoMenu()");
-        
-        if (spinning) {
-            spinBtn.textContent = "STOP";
-            spinBtn.classList.add("btn-stop");
-            spinBtn.style.opacity = "1";
-            spinBtn.style.cursor = "pointer";
-        } else {
-            spinBtn.textContent = "SPIN";
-            spinBtn.classList.remove("btn-stop");
-            spinBtn.style.opacity = "1";
-            spinBtn.style.cursor = "pointer";
-        }
-    }
-}
-
-function pemicuCooldownDepo(durasiDetik) {
-    const targetWaktu = Date.now() + (durasiDetik * 1000);
-    localStorage.setItem("depo_cooldown_target", targetWaktu);
-    jalankanCountdown();
-}
-
-function jalankanCountdown() {
-    const targetWaktu = localStorage.getItem("depo_cooldown_target");
-    if (!targetWaktu) return;
-
-    const depoBtn = document.getElementById("depoBtn");
-
-    if(cooldownInterval) clearInterval(cooldownInterval);
-
-    cooldownInterval = setInterval(() => {
-        const agora = Date.now();
-        const sisaWaktu = targetWaktu - agora;
-
-        if (sisaWaktu <= 0) {
-            clearInterval(cooldownInterval);
-            localStorage.removeItem("depo_cooldown_target");
-            depoBtn.textContent = "depo";
-            depoBtn.disabled = false;
-        } else {
-            depoBtn.disabled = true;
-            const menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
-            const detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
-            
-            const formatMenit = menit < 10 ? "0" + menit : menit;
-            const formatDetik = detik < 10 ? "0" + detik : detik;
-            
-            depoBtn.textContent = `Depo (${formatMenit}:${formatDetik})`;
-        }
-    }, 1000);
-}
-
-function cekStatusCooldownAwal() {
-    const targetWaktu = localStorage.getItem("depo_cooldown_target");
-    if (targetWaktu && parseInt(targetWaktu) > Date.now()) {
-        jalankanCountdown();
-    }
-}
-
-function openDeposit(){ 
-    playLagu(); 
-    if(!spinning) document.getElementById("depositModal").style.display="flex"; 
-}
-function closeDeposit(){ document.getElementById("depositModal").style.display="none"; }
-
-function addPoints(amount){ 
-    saldo += amount; 
-    catatRiwayat("DEPO", formatMurni(amount));
-    updateUI(); 
-    closeDeposit(); 
-    pemicuCooldownDepo(1800); 
-}
-
-function openBet(){ playLagu(); if(!spinning && !isAutoSpinning) document.getElementById("betModal").style.display="flex"; }
-function closeBet(){ document.getElementById("betModal").style.display="none"; }
-function setBet(value){ bet = value; updateUI(); closeBet(); }
-
-function openAutoMenu(){
-    playLagu();
-    if(spinning || isAutoSpinning) return;
-    document.getElementById("autoModal").style.display = "flex";
-}
-
-function closeAutoMenu(){
-    document.getElementById("autoModal").style.display = "none";
-}
-
-function handleSpinClick() {
-    playLagu();
-    if (isAutoSpinning) return;
-
-    if (!spinning) {
-        runSingleSpin();
-    } else {
-        forceStopRequested = true;
-    }
-}
-
-function pemicuAnimasiMenang(tipe, emoji) {
-    const totalPartikel = tipe === 5 ? 35 : (tipe === 4 ? 15 : 6);
-    const container = document.getElementById("mainContainer");
-
-    if (tipe === 5) {
-        container.classList.add("shake-screen");
-        setTimeout(() => container.classList.remove("shake-screen"), 2500);
-    }
-
-    for (let i = 0; i < totalPartikel; i++) {
-        const p = document.createElement("div");
-        p.className = "particle";
-        p.textContent = emoji;
-
-        if (tipe === 3) {
-            p.classList.add("p-triple");
-            p.style.left = (window.innerWidth / 2 - 150 + Math.random() * 300) + "px";
-            p.style.top = (window.innerHeight / 2 - 50 + Math.random() * 100) + "px";
-            p.style.fontSize = (20 + Math.random() * 25) + "px";
-        } else if (tipe === 4) {
-            p.classList.add("p-quad");
-            p.style.left = "50%";
-            p.style.top = "50%";
-            p.style.fontSize = (30 + Math.random() * 25) + "px";
-            
-            const sudut = Math.random() * Math.PI * 2;
-            const jarak = 150 + Math.random() * 250;
-            p.style.setProperty('--tx', Math.cos(sudut) * jarak + "px");
-            p.style.setProperty('--ty', Math.sin(sudut) * jarak + "px");
-        } else if (tipe === 5) {
-            p.classList.add("p-jackpot");
-            p.style.left = (Math.random() * 100) + "vw";
-            p.style.top = "-50px";
-            p.style.fontSize = (35 + Math.random() * 40) + "px";
-            p.style.setProperty('--dur', (1.5 + Math.random() * 2) + "s");
-            p.style.animationDelay = (Math.random() * 1.5) + "s";
         }
 
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 3500);
-    }
-}
-
-function startAutoSpin(jumlah){
-    playLagu();
-    closeAutoMenu();
-    autoSpinCount = jumlah;
-    isAutoSpinning = true;
-    updateUI();
-    runSingleSpin();
-}
-
-function stopAutoSpin(){
-    autoSpinCount = 0;
-    isAutoSpinning = false;
-    updateUI();
-}
-
-async function runSingleSpin(){
-    if(spinning) return;
-
-    if(saldo < bet){
-        document.getElementById("result").textContent = "pitih ndak adoh bajudi lo mah";
-        stopAutoSpin();
-        return;
-    }
-
-    spinning = true;
-    forceStopRequested = false; 
-    saldo -= bet;
-    updateUI();
-    document.getElementById("result").textContent = "";
-
-    startReel("r0");
-    startReel("r1");
-    startReel("r2");
-    startReel("r3");
-    startReel("r4");
-
-    let targetCombo = 0; 
-    let winEmoji = "";
-    
-    let rng = Math.random() * 100;
-
-    if (rng < 1.0) {          
-        targetCombo = 5; winEmoji = "🀄"; 
-    } else if (rng < 2.0) {   
-        targetCombo = 5; winEmoji = "🐉"; 
-    } else if (rng < 2.75) {   
-        targetCombo = 5; winEmoji = "⚡"; 
-    } else if (rng < 3.50) {   
-        targetCombo = 5; winEmoji = "🦊"; 
-    } else if (rng < 4.25) {  
-        targetCombo = 5; winEmoji = "⛩️"; 
-    } else if (rng < 5.00) {  
-        targetCombo = 5; winEmoji = "🐅"; 
-    } else if (rng < 8.00) {  
-        targetCombo = 4;                 
-    } else if (rng < 16.00) {  
-        targetCombo = 3;                 
-    } else {                  
-        targetCombo = 0;                 
-    }
-
-    let finalResults = [];
-    if (targetCombo >= 3) {
-        if(winEmoji === "") winEmoji = randomFruit();
-        
-        for (let i = 0; i < targetCombo; i++) {
-            finalResults.push(winEmoji);
+        function closeDepo() {
+            document.getElementById("depoModal").style.display = "none";
+            document.getElementById("depoAmount").value = "";
         }
-        while (finalResults.length < 5) {
-            finalResults.push(randomFruitExcept([winEmoji]));
-        }
-        finalResults.sort(() => Math.random() - 0.5);
-    } else {
-        let e0 = randomFruit();
-        let e1 = randomFruitExcept([e0]);
-        let e2 = randomFruitExcept([e0, e1]);
-        finalResults = [e0, e1, e2, randomFruit(), randomFruit()];
-    }
 
-    if(!forceStopRequested) await wait(800);
-    stopReel("r0", finalResults[0]);
+        function prosesDepo() {
+            const amountInput = document.getElementById("depoAmount").value;
+            const amount = parseFloat(amountInput);
 
-    if(!forceStopRequested) await wait(250);
-    stopReel("r1", finalResults[1]);
-
-    if(!forceStopRequested) await wait(250);
-    stopReel("r2", finalResults[2]);
-
-    if(!forceStopRequested) await wait(250);
-    stopReel("r3", finalResults[3]);
-
-    if(!forceStopRequested) await wait(250);
-    stopReel("r4", finalResults[4]);
-
-    let finalCounts = {};
-    finalResults.forEach(x => finalCounts[x] = (finalCounts[x] || 0) + 1);
-
-    let menangEmoji = "";
-    let jumlahKembar = 0;
-
-    for(let emoji in finalCounts) {
-        if(finalCounts[emoji] > jumlahKembar) {
-            jumlahKembar = finalCounts[emoji];
-            menangEmoji = emoji;
-        }
-    }
-    
-    let hadiah = 0;
-    let pesan = "ZONK! Coba Lagi."; 
-
-    if (jumlahKembar >= 3) {
-        let keyX = "x" + jumlahKembar; 
-        let pengali = emojiSettings[menangEmoji][keyX];
-        hadiah = bet * pengali; 
-        
-        catatRiwayat("WIN", `${formatMurni(hadiah)} (${emojiSettings[menangEmoji].nama})`);
-
-        if (jumlahKembar === 5) {
-            pesan = `😈 JACKPOT MUTLAK 5 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
-        } else if (jumlahKembar === 4) {
-            pesan = `🔥 MEGA WIN 4 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
-        } else if (jumlahKembar === 3) {
-            pesan = `😡GACOR 3 KEMBAR (${emojiSettings[menangEmoji].nama})! +Rp${formatMurni(hadiah)}`;
-        }
-        
-        pemicuAnimasiMenang(jumlahKembar, menangEmoji);
-    }
-    saldo += hadiah;
-    spinning = false;
-    forceStopRequested = false;
-    updateUI();
-
-    document.getElementById("result").textContent = pesan;
-
-    if(isAutoSpinning){
-        autoSpinCount--;
-        if(autoSpinCount <= 0){
-            isAutoSpinning = false;
-        }
-        updateUI();
-        if(isAutoSpinning){
-            // UPDATE JEDA COOLDOWN SPIN:
-            // Jika mendapatkan kembar 5, sistem otomatis ditahan selama 4500ms (4.5 detik) agar animasi tuntas.
-            if (jumlahKembar === 5) {
-                await wait(4500); 
-            } else if (jumlahKembar === 4 || jumlahKembar === 3) {
-                await wait(3500); 
-            } else {
-                await wait(1000); 
+            if (isNaN(amount) || amount <= 0) {
+                alert("Masukkan jumlah deposit yang valid!");
+                return;
             }
+
+            if (amount > 100.00) {
+                alert("Gagal! Maksimal deposit adalah Rp100,00 per jam.");
+                return;
+            }
+
+            const terakhirDepo = localStorage.getItem('terakhir_depo');
+            const sekarang = Date.now();
+
+            if (terakhirDepo && (sekarang - terakhirDepo < 3600000)) {
+                const sisaWaktu = Math.ceil((3600000 - (sekarang - terakhirDepo)) / 60000);
+                alert(`Gagal! Silakan tunggu ${sisaWaktu} menit lagi untuk dapat depo kembali.`);
+                return;
+            }
+
+            saldo += amount;
+            localStorage.setItem('slot_saldo', saldo);
+            localStorage.setItem('terakhir_depo', sekarang);
+            
+            alert(`Deposit Rp${formatMurni(amount)} Berhasil!`);
+            closeDepo();
+            updateUI();
+            cekCooldownDepo();
+        }
+
+        function cekCooldownDepo() {
+            const terakhirDepo = localStorage.getItem('terakhir_depo');
+            const sekarang = Date.now();
+            const btn = document.getElementById("depoTopBtn");
+
+            if (terakhirDepo && (sekarang - terakhirDepo < 3600000)) {
+                const sisaDetik = Math.ceil((3600000 - (sekarang - terakhirDepo)) / 1000);
+                let menit = Math.floor(sisaDetik / 60);
+                let detik = sisaDetik % 60;
+                
+                btn.disabled = true;
+                btn.textContent = `WAIT (${menit}m ${detik}s)`;
+                setTimeout(cekCooldownDepo, 1000);
+            } else {
+                btn.disabled = false;
+                btn.textContent = "DEPOSIT";
+            }
+        }
+
+        // =========================================================================
+        // CORE SLOT GAME MECHANIC
+        // =========================================================================
+        function randomFruit() {
+            return fruits[Math.floor(Math.random() * fruits.length)];
+        }
+
+        function randomFruitExcept(fb) {
+            const al = fruits.filter(f => !fb.includes(f));
+            return al[Math.floor(Math.random() * al.length)];
+        }
+
+        function createTrack(id) {
+            const track = document.getElementById(id);
+            track.innerHTML = "";
+            for (let i = 0; i < 12; i++) {
+                const div = document.createElement("div");
+                div.className = "item";
+                div.textContent = randomFruit();
+                track.appendChild(div);
+            }
+        }
+        
+        ["r0", "r1", "r2", "r3", "r4"].forEach(createTrack);
+
+        function startReel(id) {
+            const track = document.getElementById(id);
+            track.parentElement.classList.add("spinning");
+            
+            let speed = isTurbo ? 50 : 110;
+            
+            intervals[id] = setInterval(() => {
+                const item = document.createElement("div");
+                item.className = "item";
+                item.textContent = randomFruit();
+                track.prepend(item);
+                
+                track.style.transition = "none";
+                track.style.transform = "translateY(-100%)";
+                track.offsetHeight;
+                
+                track.style.transition = `transform ${speed / 1000}s linear`;
+                track.style.transform = "translateY(0px)";
+                
+                while (track.children.length > 12) {
+                    track.removeChild(track.lastElementChild);
+                }
+            }, speed);
+        }
+
+        function stopReel(id, forcedFruit = null) {
+            clearInterval(intervals[id]);
+            const track = document.getElementById(id);
+            track.parentElement.classList.remove("spinning");
+            
+            let fruit = forcedFruit ? forcedFruit : randomFruit();
+            track.innerHTML = `<div class="item">${fruit}</div>`;
+            return fruit;
+        }
+
+        function wait(ms) {
+            let waktuTunggu = isTurbo ? ms * 0.15 : ms;
+            return new Promise(resolve => setTimeout(resolve, waktuTunggu));
+        }
+
+        function jalankanCounterJackpot(targetHadiah) {
+            const counterElement = document.getElementById("jpCounterText");
+            let start = null;
+            
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = Math.min((timestamp - start) / 2000, 1);
+                counterElement.textContent = "Rp" + formatMurni(progress * targetHadiah);
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    counterElement.textContent = "Rp" + formatMurni(targetHadiah);
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+
+        function closeJackpotModal() {
+            document.getElementById("jackpotModal").style.display = "none";
+            if (jackpotPromiseResolver) {
+                jackpotPromiseResolver();
+                jackpotPromiseResolver = null;
+            }
+        }
+
+        function toggleTurbo() {
+            isTurbo = !isTurbo;
+            const btn = document.getElementById("turboBtn");
+            if (isTurbo) {
+                btn.textContent = "TURBO: ON";
+                btn.classList.add("active");
+            } else {
+                btn.textContent = "TURBO: OFF";
+                btn.classList.remove("active");
+            }
+        }
+
+        function updateUI() {
+            document.getElementById("saldo").textContent = formatMurni(saldo);
+            document.getElementById("betText").textContent = formatMurni(bet);
             
             if (isAutoSpinning) {
-                runSingleSpin();
+                document.getElementById("autoSpinBox").style.display = "block";
+                document.getElementById("autoCountText").textContent = autoSpinCount;
+                document.getElementById("autoMenuBtn").textContent = "STOP";
+            } else {
+                document.getElementById("autoSpinBox").style.display = "none";
+                document.getElementById("autoMenuBtn").textContent = "AUTO";
             }
         }
-    }
-}
-updateUI();
-cekStatusCooldownAwal();
-</script>
 
+        function openBet() {
+            if (!spinning && !isAutoSpinning) {
+                document.getElementById("betModal").style.display = "flex";
+            }
+        }
+
+        function closeBet() {
+            document.getElementById("betModal").style.display = "none";
+        }
+
+        function setBet(v) {
+            bet = v;
+            updateUI();
+            closeBet();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateUI();
+            cekCooldownDepo();
+        });
+
+        function openAutoMenu() {
+            if (isAutoSpinning) {
+                isAutoSpinning = false;
+                updateUI();
+                return;
+            }
+            if (!spinning) {
+                document.getElementById("autoModal").style.display = "flex";
+            }
+        }
+
+        function closeAutoMenu() {
+            document.getElementById("autoModal").style.display = "none";
+        }
+
+        function handleSpinClick() {
+            if (!isAutoSpinning) {
+                if (!spinning) {
+                    runSingleSpin();
+                } else {
+                    forceStopRequested = true;
+                }
+            }
+        }
+
+        function startAutoSpin(j) {
+            closeAutoMenu();
+            autoSpinCount = j;
+            isAutoSpinning = true;
+            updateUI();
+            runSingleSpin();
+        }
+
+        function pemicuAnimasiMenang(tipe, emoji) {
+            const container = document.getElementById("mainContainer");
+            if (tipe === 5) {
+                playJackpotSound(); // Memutar efek suara jackpot
+                container.classList.add("shake-screen");
+                setTimeout(() => { container.classList.remove("shake-screen"); }, 2500);
+                
+                for (let i = 0; i < 30; i++) {
+                    const p = document.createElement("div");
+                    p.className = "particle p-coin-jp";
+                    p.textContent = "🪙";
+                    p.style.left = "50%";
+                    p.style.top = "50%";
+                    p.style.fontSize = (20 + Math.random() * 20) + "px";
+                    
+                    const sudut = Math.random() * Math.PI * 2;
+                    const jarak = 100 + Math.random() * 150;
+                    
+                    p.style.setProperty('--cx', Math.cos(sudut) * jarak + "px");
+                    p.style.setProperty('--cy', Math.sin(sudut) * jarak + "px");
+                    p.style.setProperty('--dur', (0.8 + Math.random() * 0.8) + "s");
+                    
+                    document.getElementById("jackpotModal").appendChild(p);
+                    setTimeout(() => { p.remove(); }, 2000);
+                }
+            }
+        }
+
+        async function runSingleSpin() {
+            if (spinning) return;
+            
+            if (saldo < bet) {
+                alert("Sisa Tunai Tidak Mencukupi, Silakan Isi Ulang Lewat Menu Deposit!");
+                isAutoSpinning = false;
+                updateUI();
+                return;
+            }
+
+            // Memulai loop audio detak putaran mekanis roda
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            soundInterval = setInterval(playSpinTickSound, isTurbo ? 40 : 90);
+
+            spinning = true;
+            forceStopRequested = false;
+            saldo -= bet;
+            localStorage.setItem('slot_saldo', saldo);
+            updateUI();
+            document.getElementById("result").textContent = "";
+
+            startReel("r0");
+            startReel("r1");
+            startReel("r2");
+            startReel("r3");
+            startReel("r4");
+
+            let targetCombo = 0;
+            let winEmoji = "";
+            let rng = Math.random() * 100;
+
+            // CHANCE KEMBAR 5 DI BAGI 10 (DARI 0.08% MENJADI 0.008% SETIAP EMOJI)
+            if (rng < 0.008) { targetCombo = 5; winEmoji = "🀄"; } 
+            else if (rng < 0.016) { targetCombo = 5; winEmoji = "🐉"; } 
+            else if (rng < 0.024) { targetCombo = 5; winEmoji = "⚡"; } 
+            else if (rng < 0.032) { targetCombo = 5; winEmoji = "👹"; } 
+            else if (rng < 0.040) { targetCombo = 5; winEmoji = "🎭"; } 
+            else if (rng < 0.048) { targetCombo = 5; winEmoji = "🪙"; } 
+            else if (rng < 0.056) { targetCombo = 5; winEmoji = "⛩️"; } 
+            else if (rng < 0.064) { targetCombo = 5; winEmoji = "🐅"; } 
+            else if (rng < 0.072) { targetCombo = 5; winEmoji = "🌸"; } 
+            else if (rng < 0.080) { targetCombo = 5; winEmoji = "🏮"; } 
+            else if (rng < 0.088) { targetCombo = 5; winEmoji = "🎋"; } 
+            else if (rng < 2.5) { targetCombo = 4; } 
+            else if (rng < 7.5) { targetCombo = 3; } 
+            else { targetCombo = 0; }
+
+            let finalResults = [];
+            if (targetCombo >= 3) {
+                if (winEmoji === "") winEmoji = randomFruit();
+                for (let i = 0; i < targetCombo; i++) {
+                    finalResults.push(winEmoji);
+                }
+                while (finalResults.length < 5) {
+                    finalResults.push(randomFruitExcept([winEmoji]));
+                }
+                finalResults.sort(() => Math.random() - 0.5);
+            } else {
+                let e0 = randomFruit();
+                let e1 = randomFruitExcept([e0]);
+                let e2 = randomFruitExcept([e0, e1]);
+                finalResults = [e0, e1, e2, randomFruit(), randomFruit()];
+            }
+
+            if (!forceStopRequested) await wait(850);
+            stopReel("r0", finalResults[0]);
+            if (!forceStopRequested) await wait(250);
+            stopReel("r1", finalResults[1]);
+            if (!forceStopRequested) await wait(250);
+            stopReel("r2", finalResults[2]);
+            if (!forceStopRequested) await wait(250);
+            stopReel("r3", finalResults[3]);
+            if (!forceStopRequested) await wait(250);
+            stopReel("r4", finalResults[4]);
+
+            // Menghentikan efek suara putaran setelah semua roda berhenti bergerak
+            clearInterval(soundInterval);
+
+            let finalCounts = {};
+            finalResults.forEach(x => { finalCounts[x] = (finalCounts[x] || 0) + 1; });
+            
+            let menangEmoji = "";
+            let jumlahKembar = 0;
+            
+            for (let em in finalCounts) {
+                if (finalCounts[em] > jumlahKembar) {
+                    jumlahKembar = finalCounts[em];
+                    menangEmoji = em;
+                }
+            }
+
+            let hadiah = 0;
+            if (jumlahKembar >= 3) {
+                let multiplier = emojiSettings[menangEmoji]["x" + jumlahKembar];
+                hadiah = bet * multiplier;
+                pemicuAnimasiMenang(jumlahKembar, menangEmoji);
+                document.getElementById("result").textContent = `WIN Rp${formatMurni(hadiah)}`;
+            }
+
+            saldo += hadiah;
+            localStorage.setItem('slot_saldo', saldo);
+            spinning = false;
+            updateUI();
+
+            if (jumlahKembar === 5) {
+                document.getElementById("jpEmojiBox").textContent = menangEmoji;
+                document.getElementById("jpCounterText").textContent = "Rp0,00";
+                document.getElementById("jackpotModal").style.display = "flex";
+                jalankanCounterJackpot(hadiah);
+                await new Promise(r => { jackpotPromiseResolver = r; });
+            }
+
+            if (isAutoSpinning) {
+                autoSpinCount--;
+                if (autoSpinCount <= 0) isAutoSpinning = false;
+                updateUI();
+                if (isAutoSpinning) {
+                    await wait(1600);
+                    if (isAutoSpinning) runSingleSpin();
+                }
+            }
+        }
+    </script>
 </body>
 </html>
