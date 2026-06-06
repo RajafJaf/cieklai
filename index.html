@@ -29,18 +29,25 @@ body{
 
 nav{
     display:flex;
-    gap:15px;
+    gap:10px; /* Diperkecil sedikit agar jarak antar tombol pas */
+    align-items: center;
 }
 
 .menu{
     text-decoration:none;
     color:white;
     background:linear-gradient(45deg,#2196f3,#00e5ff);
-    padding:10px 18px;
+    padding:6px 12px; /* Ukuran padding diperkecil */
     border-radius:30px;
     font-weight:bold;
+    font-size: 14px; /* Ukuran font diperkecil */
     transition:.3s;
     box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* Membedakan warna tombol kalkulator jika diinginkan (opsional) */
+.menu.calc {
+    background:linear-gradient(45deg,#ff9800,#ff5722);
 }
 
 .menu:hover{
@@ -197,6 +204,7 @@ footer{
         <div class="logo">😈 Hytam Article</div>
 
         <nav>
+            <a href="kalkulator.html" class="menu calc">🧮 kalkulator</a>
             <a href="peringatan.html" class="menu">🀄gacor</a>
             <a href="profil.html" class="menu">👤 developer</a>
         </nav>
