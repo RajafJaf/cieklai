@@ -142,6 +142,24 @@ secara otomatis.
 Di masa depan, teknologi digital diperkirakan akan semakin berkembang
 dengan hadirnya kecerdasan buatan, robotika, dan komputasi kuantum.
 </p>
+  <p> "#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    double S, V;
+    cin >> S >> V; // S = sudut peluncuran (derajat), V = kecepatan awal
+
+    double g = 10.0;
+    double rad = S * M_PI / 180.0; // konversi derajat ke radian
+
+    // Rumus jarak horizontal terjauh (jarak tempuh proyektil)
+    double R = (V * V * sin(2 * rad)) / g;
+
+    cout << fixed << setprecision(1) << R << endl;
+
+    return 0;
+}"
+  </p>
 
 </div>
 
